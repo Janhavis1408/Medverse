@@ -12,6 +12,13 @@ const app = express();
 
 app.use(cors());
 app.use(express.json());
+
+// ==========================================
+// SERVE FRONTEND FILES
+// ==========================================
+
+app.use(express.static(__dirname));
+
 // ==========================================
 // USER AUTHENTICATION
 // ==========================================
