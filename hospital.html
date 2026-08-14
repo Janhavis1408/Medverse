@@ -1,0 +1,2769 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>MedVerse - Nearby Healthcare</title>
+
+
+    <!-- ==========================================
+         LEAFLET CSS
+    =========================================== -->
+
+    <link
+        rel="stylesheet"
+        href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+        crossorigin=""
+    >
+
+
+    <!-- ==========================================
+         PAGE CSS
+    =========================================== -->
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+
+        body {
+
+            font-family:
+                Arial,
+                Helvetica,
+                sans-serif;
+
+            background: #f4f8ff;
+
+            color: #1e293b;
+
+            min-height: 100vh;
+
+        }
+
+
+        /* ==========================================
+           HEADER
+        =========================================== */
+
+        .page-header {
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #2563eb,
+                    #38bdf8
+                );
+
+            color: white;
+
+            text-align: center;
+
+            padding: 28px 20px;
+
+        }
+
+
+        .page-header h1 {
+
+            font-size: 30px;
+
+            margin-bottom: 8px;
+
+        }
+
+
+        .page-header p {
+
+            font-size: 15px;
+
+            opacity: 0.9;
+
+        }
+
+
+        /* ==========================================
+           MAIN CONTAINER
+        =========================================== */
+
+        .container {
+
+            width: 92%;
+
+            max-width: 1200px;
+
+            margin: 30px auto;
+
+        }
+
+
+        /* ==========================================
+           LOCATION CARD
+        =========================================== */
+
+        .location-card {
+
+            background: white;
+
+            border-radius: 18px;
+
+            padding: 22px;
+
+            margin-bottom: 22px;
+
+            box-shadow:
+                0 5px 20px
+                rgba(0, 0, 0, 0.08);
+
+        }
+
+
+        .location-card h2 {
+
+            margin-bottom: 8px;
+
+            font-size: 22px;
+
+        }
+
+
+        #locationStatus {
+
+            color: #64748b;
+
+            margin-bottom: 16px;
+
+            line-height: 1.5;
+
+        }
+
+
+        .location-btn {
+
+            border: none;
+
+            background: #2563eb;
+
+            color: white;
+
+            padding: 12px 20px;
+
+            border-radius: 10px;
+
+            cursor: pointer;
+
+            font-size: 15px;
+
+            font-weight: 600;
+
+        }
+
+
+        .location-btn:hover {
+
+            background: #1d4ed8;
+
+        }
+
+
+        /* ==========================================
+           MAP
+        =========================================== */
+
+        #map {
+
+            width: 100%;
+
+            height: 450px;
+
+            border-radius: 18px;
+
+            overflow: hidden;
+
+            margin-bottom: 25px;
+
+            box-shadow:
+                0 5px 20px
+                rgba(0, 0, 0, 0.08);
+
+        }
+
+
+        /* ==========================================
+           TABS
+        =========================================== */
+
+        .healthcare-tabs {
+
+            display: flex;
+
+            gap: 12px;
+
+            margin-bottom: 25px;
+
+        }
+
+
+        .tab-btn {
+
+            border: none;
+
+            padding: 13px 22px;
+
+            border-radius: 10px;
+
+            cursor: pointer;
+
+            background: #e2e8f0;
+
+            color: #334155;
+
+            font-size: 15px;
+
+            font-weight: 600;
+
+        }
+
+
+        .tab-btn.active {
+
+            background: #2563eb;
+
+            color: white;
+
+        }
+
+
+        .tab-btn:hover {
+
+            background: #dbeafe;
+
+        }
+
+
+        .tab-btn.active:hover {
+
+            background: #1d4ed8;
+
+        }
+
+
+        /* ==========================================
+           RESULTS
+        =========================================== */
+
+        .results-heading {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            margin-bottom: 18px;
+
+        }
+
+
+        .results-heading h2 {
+
+            font-size: 23px;
+
+        }
+
+
+        #resultsCount {
+
+            color: #64748b;
+
+            font-size: 14px;
+
+        }
+
+
+        #placeResults {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(
+                    auto-fit,
+                    minmax(280px, 1fr)
+                );
+
+            gap: 20px;
+
+        }
+
+
+        /* ==========================================
+           PLACE CARD
+        =========================================== */
+
+        .place-card {
+
+            background: white;
+
+            border-radius: 18px;
+
+            padding: 20px;
+
+            box-shadow:
+                0 5px 20px
+                rgba(0, 0, 0, 0.08);
+
+            transition:
+                transform 0.2s ease,
+                box-shadow 0.2s ease;
+
+        }
+
+
+        .place-card:hover {
+
+            transform:
+                translateY(-4px);
+
+            box-shadow:
+                0 10px 25px
+                rgba(0, 0, 0, 0.12);
+
+        }
+
+
+        .place-icon {
+
+            font-size: 32px;
+
+            margin-bottom: 10px;
+
+        }
+
+
+        .place-card h3 {
+
+            font-size: 19px;
+
+            margin-bottom: 10px;
+
+            color: #0f172a;
+
+        }
+
+
+        .rating {
+
+            color: #f59e0b;
+
+            font-weight: 700;
+
+            margin-bottom: 9px;
+
+        }
+
+
+        .rating-unavailable {
+
+            color: #94a3b8;
+
+            font-size: 14px;
+
+            margin-bottom: 9px;
+
+        }
+
+
+        .address {
+
+            color: #64748b;
+
+            font-size: 14px;
+
+            line-height: 1.5;
+
+            margin-bottom: 10px;
+
+        }
+
+
+        .distance {
+
+            color: #2563eb;
+
+            font-weight: 700;
+
+            margin-bottom: 10px;
+
+        }
+
+
+        .open {
+
+            color: #16a34a;
+
+            font-weight: 700;
+
+            font-size: 14px;
+
+        }
+
+
+        .closed {
+
+            color: #dc2626;
+
+            font-weight: 700;
+
+            font-size: 14px;
+
+        }
+
+
+        .unknown-status {
+
+            color: #64748b;
+
+            font-size: 14px;
+
+        }
+
+
+        .phone {
+
+            color: #334155;
+
+            font-size: 14px;
+
+            margin-top: 8px;
+
+        }
+
+
+        .card-buttons {
+
+            display: flex;
+
+            gap: 10px;
+
+            flex-wrap: wrap;
+
+            margin-top: 15px;
+
+        }
+
+
+        .direction-btn {
+
+            display: inline-block;
+
+            text-decoration: none;
+
+            background: #2563eb;
+
+            color: white;
+
+            padding: 10px 14px;
+
+            border-radius: 9px;
+
+            font-size: 14px;
+
+            font-weight: 600;
+
+        }
+
+
+        .direction-btn:hover {
+
+            background: #1d4ed8;
+
+        }
+
+
+        .website-btn {
+
+            display: inline-block;
+
+            text-decoration: none;
+
+            background: #e0f2fe;
+
+            color: #0369a1;
+
+            padding: 10px 14px;
+
+            border-radius: 9px;
+
+            font-size: 14px;
+
+            font-weight: 600;
+
+        }
+
+
+        /* ==========================================
+           LOADING
+        =========================================== */
+
+        .loading {
+
+            grid-column: 1 / -1;
+
+            background: white;
+
+            border-radius: 18px;
+
+            padding: 40px;
+
+            text-align: center;
+
+            color: #64748b;
+
+            font-size: 16px;
+
+        }
+
+
+        .error {
+
+            grid-column: 1 / -1;
+
+            background: #fee2e2;
+
+            color: #991b1b;
+
+            border-radius: 14px;
+
+            padding: 20px;
+
+            line-height: 1.6;
+
+        }
+
+
+        .empty {
+
+            grid-column: 1 / -1;
+
+            background: white;
+
+            border-radius: 18px;
+
+            padding: 40px;
+
+            text-align: center;
+
+            color: #64748b;
+
+        }
+
+
+        /* ==========================================
+           FOOTER
+        =========================================== */
+
+        footer {
+
+            text-align: center;
+
+            padding: 30px 20px;
+
+            color: #64748b;
+
+            font-size: 13px;
+
+        }
+
+
+        /* ==========================================
+           MOBILE
+        =========================================== */
+
+        @media (max-width: 700px) {
+
+            .page-header h1 {
+
+                font-size: 23px;
+
+            }
+
+
+            .container {
+
+                width: 94%;
+
+            }
+
+
+            #map {
+
+                height: 350px;
+
+            }
+
+
+            .healthcare-tabs {
+
+                flex-direction: column;
+
+            }
+
+
+            .tab-btn {
+
+                width: 100%;
+
+            }
+
+
+            .results-heading {
+
+                flex-direction: column;
+
+                align-items: flex-start;
+
+                gap: 5px;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- ==========================================
+     HEADER
+=========================================== -->
+
+<header class="page-header">
+
+    <h1>
+        🩺 MedVerse Healthcare Finder
+    </h1>
+
+    <p>
+        Find real hospitals and pharmacies near you
+    </p>
+
+</header>
+
+
+<!-- ==========================================
+     MAIN
+=========================================== -->
+
+<main class="container">
+
+
+    <!-- LOCATION -->
+
+    <section class="location-card">
+
+        <h2>
+            📍 Your Location
+        </h2>
+
+        <p id="locationStatus">
+
+            Waiting to detect your location...
+
+        </p>
+
+
+        <button
+            id="locationBtn"
+            class="location-btn">
+
+            📍 Use My Current Location
+
+        </button>
+
+    </section>
+
+
+    <!-- MAP -->
+
+    <div id="map"></div>
+
+
+    <!-- TABS -->
+
+    <div class="healthcare-tabs">
+
+        <button
+            id="hospitalTab"
+            class="tab-btn active">
+
+            🏥 Hospitals
+
+        </button>
+
+
+        <button
+            id="pharmacyTab"
+            class="tab-btn">
+
+            💊 Pharmacies
+
+        </button>
+
+    </div>
+
+
+    <!-- RESULTS HEADING -->
+
+    <div class="results-heading">
+
+        <h2 id="resultsTitle">
+
+            Nearby Hospitals
+
+        </h2>
+
+
+        <span id="resultsCount">
+
+            Finding nearby places...
+
+        </span>
+
+    </div>
+
+
+    <!-- RESULTS -->
+
+    <div id="placeResults">
+
+        <div class="loading">
+
+            📍
+
+            Please allow location access
+            to find nearby healthcare.
+
+        </div>
+
+    </div>
+
+
+</main>
+
+
+<!-- ==========================================
+     FOOTER
+=========================================== -->
+
+<footer>
+
+    <p>
+        MedVerse © 2026
+    </p>
+
+    <p>
+        Map data © OpenStreetMap contributors
+    </p>
+
+</footer>
+
+
+
+<!-- ==========================================
+     LEAFLET JAVASCRIPT
+=========================================== -->
+
+<script
+    src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+    crossorigin="">
+</script>
+
+
+
+<script>
+
+/* =================================================
+   MEDVERSE HEALTHCARE FINDER
+================================================= */
+
+
+/* =================================================
+   VARIABLES
+================================================= */
+
+let map = null;
+
+let userMarker = null;
+
+let accuracyCircle = null;
+
+let placeMarkers = [];
+
+let userLocation = null;
+
+let currentType = "hospital";
+
+
+/*
+   Search radius.
+
+   5 km gives us a useful number
+   of nearby results without making
+   the Overpass query unnecessarily large.
+*/
+
+const SEARCH_RADIUS = 5000;
+
+
+/*
+   Overpass API endpoint.
+
+   No API key required.
+*/
+
+const OVERPASS_URL =
+    "https://overpass-api.de/api/interpreter";
+
+
+/* =================================================
+   HTML ELEMENTS
+================================================= */
+
+const locationStatus =
+    document.getElementById(
+        "locationStatus"
+    );
+
+
+const locationBtn =
+    document.getElementById(
+        "locationBtn"
+    );
+
+
+const hospitalTab =
+    document.getElementById(
+        "hospitalTab"
+    );
+
+
+const pharmacyTab =
+    document.getElementById(
+        "pharmacyTab"
+    );
+
+
+const resultsTitle =
+    document.getElementById(
+        "resultsTitle"
+    );
+
+
+const resultsCount =
+    document.getElementById(
+        "resultsCount"
+    );
+
+
+const placeResults =
+    document.getElementById(
+        "placeResults"
+    );
+
+
+/* =================================================
+   INITIAL MAP
+================================================= */
+
+function createMap() {
+
+    /*
+       Temporary starting point:
+       Pune.
+
+       This is NOT the user's location.
+
+       It is only used until the browser
+       gives us the user's real coordinates.
+    */
+
+    const defaultLat = 18.5204;
+
+    const defaultLng = 73.8567;
+
+
+    map = L.map("map").setView(
+
+        [
+            defaultLat,
+            defaultLng
+        ],
+
+        12
+
+    );
+
+
+    /*
+       OpenStreetMap tiles.
+    */
+
+    L.tileLayer(
+
+        "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+
+        {
+
+            maxZoom: 19,
+
+            attribution:
+                '&copy; <a href="https://www.openstreetmap.org/copyright">' +
+                'OpenStreetMap</a> contributors'
+
+        }
+
+    ).addTo(map);
+
+}
+
+
+/* =================================================
+   GET USER LOCATION
+================================================= */
+
+function getUserLocation() {
+
+    /*
+       Check browser support.
+    */
+
+    if (!navigator.geolocation) {
+
+        locationStatus.innerText =
+            "❌ Geolocation is not supported by this browser.";
+
+        return;
+
+    }
+
+
+    locationStatus.innerText =
+        "📍 Detecting your current location...";
+
+
+    locationBtn.disabled = true;
+
+    locationBtn.innerText =
+        "📍 Detecting...";
+
+
+    /*
+       Browser asks user for permission.
+    */
+
+    navigator.geolocation.getCurrentPosition(
+
+        function(position) {
+
+            const latitude =
+                position.coords.latitude;
+
+
+            const longitude =
+                position.coords.longitude;
+
+
+            const accuracy =
+                position.coords.accuracy;
+
+
+            userLocation = {
+
+                lat: latitude,
+
+                lng: longitude,
+
+                accuracy: accuracy
+
+            };
+
+
+            /*
+               Update status.
+            */
+
+            locationStatus.innerText =
+                "✅ Your current location has been detected.";
+
+
+            locationBtn.disabled = false;
+
+            locationBtn.innerText =
+                "📍 Refresh My Location";
+
+
+            /*
+               Move map to user.
+            */
+
+            map.setView(
+
+                [
+                    latitude,
+                    longitude
+                ],
+
+                15
+
+            );
+
+
+            /*
+               Display user marker.
+            */
+
+            showUserLocation();
+
+
+            /*
+               Search hospitals.
+            */
+
+            searchNearbyPlaces();
+
+        },
+
+
+        function(error) {
+
+            console.error(
+                "Location error:",
+                error
+            );
+
+
+            locationBtn.disabled = false;
+
+            locationBtn.innerText =
+                "📍 Try Again";
+
+
+            if (
+                error.code ===
+                error.PERMISSION_DENIED
+            ) {
+
+                locationStatus.innerText =
+                    "❌ Location permission was denied. Please allow location access and try again.";
+
+            }
+
+            else if (
+                error.code ===
+                error.POSITION_UNAVAILABLE
+            ) {
+
+                locationStatus.innerText =
+                    "❌ Your location could not be determined.";
+
+            }
+
+            else if (
+                error.code ===
+                error.TIMEOUT
+            ) {
+
+                locationStatus.innerText =
+                    "❌ Location request timed out. Please try again.";
+
+            }
+
+            else {
+
+                locationStatus.innerText =
+                    "❌ Unable to detect your location.";
+
+            }
+
+
+            placeResults.innerHTML = `
+
+                <div class="error">
+
+                    📍 MedVerse needs your location
+                    to find nearby hospitals and pharmacies.
+
+                    <br><br>
+
+                    Please allow location permission
+                    in your browser and click
+                    <strong>Try Again</strong>.
+
+                </div>
+
+            `;
+
+
+        },
+
+        {
+
+            enableHighAccuracy: true,
+
+            timeout: 15000,
+
+            maximumAge: 0
+
+        }
+
+    );
+
+}
+
+
+/* =================================================
+   SHOW USER LOCATION
+================================================= */
+
+function showUserLocation() {
+
+    if (!userLocation) {
+
+        return;
+
+    }
+
+
+    /*
+       Remove old marker.
+    */
+
+    if (userMarker) {
+
+        map.removeLayer(
+            userMarker
+        );
+
+    }
+
+
+    /*
+       Remove old accuracy circle.
+    */
+
+    if (accuracyCircle) {
+
+        map.removeLayer(
+            accuracyCircle
+        );
+
+    }
+
+
+    /*
+       Blue user marker.
+    */
+
+    userMarker =
+        L.circleMarker(
+
+            [
+                userLocation.lat,
+                userLocation.lng
+            ],
+
+            {
+
+                radius: 9,
+
+                color: "#ffffff",
+
+                weight: 3,
+
+                fillColor: "#2563eb",
+
+                fillOpacity: 1
+
+            }
+
+        ).addTo(map);
+
+
+    userMarker.bindPopup(
+
+        "<strong>📍 You are here</strong>"
+
+    );
+
+
+    /*
+       Accuracy circle.
+
+       This shows approximately how
+       accurate the browser location is.
+    */
+
+    accuracyCircle =
+        L.circle(
+
+            [
+                userLocation.lat,
+                userLocation.lng
+            ],
+
+            {
+
+                radius:
+                    Math.min(
+                        userLocation.accuracy,
+                        500
+                    ),
+
+                color: "#2563eb",
+
+                fillColor: "#2563eb",
+
+                fillOpacity: 0.08,
+
+                weight: 1
+
+            }
+
+        ).addTo(map);
+
+}
+
+
+/* =================================================
+   BUILD OVERPASS QUERY
+================================================= */
+
+function buildOverpassQuery() {
+
+    const lat =
+        userLocation.lat;
+
+
+    const lng =
+        userLocation.lng;
+
+
+    /*
+       Hospitals:
+       - amenity=hospital
+       - healthcare=hospital
+
+       Pharmacies:
+       - amenity=pharmacy
+
+       We search nodes, ways and relations.
+    */
+
+    let query;
+
+
+    if (currentType === "hospital") {
+
+        query = `
+
+            [out:json][timeout:25];
+
+            (
+
+                nwr[
+                    "amenity"="hospital"
+                ](
+                    around:${SEARCH_RADIUS},
+                    ${lat},
+                    ${lng}
+                );
+
+                nwr[
+                    "healthcare"="hospital"
+                ](
+                    around:${SEARCH_RADIUS},
+                    ${lat},
+                    ${lng}
+                );
+
+            );
+
+            out center tags;
+
+        `;
+
+    }
+
+    else {
+
+        query = `
+
+            [out:json][timeout:25];
+
+            (
+
+                nwr[
+                    "amenity"="pharmacy"
+                ](
+                    around:${SEARCH_RADIUS},
+                    ${lat},
+                    ${lng}
+                );
+
+                nwr[
+                    "healthcare"="pharmacy"
+                ](
+                    around:${SEARCH_RADIUS},
+                    ${lat},
+                    ${lng}
+                );
+
+            );
+
+            out center tags;
+
+        `;
+
+    }
+
+
+    return query;
+
+}
+
+
+/* =================================================
+   SEARCH NEARBY PLACES
+================================================= */
+
+async function searchNearbyPlaces() {
+
+    if (!userLocation) {
+
+        return;
+
+    }
+
+
+    /*
+       Show loading.
+    */
+
+    const typeName =
+        currentType === "hospital"
+            ? "hospitals"
+            : "pharmacies";
+
+
+    resultsTitle.innerText =
+        currentType === "hospital"
+            ? "Nearby Hospitals"
+            : "Nearby Pharmacies";
+
+
+    resultsCount.innerText =
+        "Searching...";
+
+
+    placeResults.innerHTML = `
+
+        <div class="loading">
+
+            🔎 Finding real nearby
+            ${typeName}...
+
+            <br><br>
+
+            This may take a few seconds.
+
+        </div>
+
+    `;
+
+
+    /*
+       Remove old markers.
+    */
+
+    clearPlaceMarkers();
+
+
+    try {
+
+        const query =
+            buildOverpassQuery();
+
+
+        /*
+           Send query to Overpass.
+        */
+
+        const response =
+            await fetch(
+
+                OVERPASS_URL,
+
+                {
+
+                    method: "POST",
+
+                    headers: {
+
+                        "Content-Type":
+                            "application/x-www-form-urlencoded"
+
+                    },
+
+                    body:
+                        "data=" +
+                        encodeURIComponent(
+                            query
+                        )
+
+                }
+
+            );
+
+
+        if (!response.ok) {
+
+            throw new Error(
+                "Overpass server returned " +
+                response.status
+            );
+
+        }
+
+
+        const data =
+            await response.json();
+
+
+        /*
+           Process results.
+        */
+
+        const places =
+            processPlaces(
+                data.elements || []
+            );
+
+
+        /*
+           Sort nearest first.
+        */
+
+        places.sort(
+
+            function(a, b) {
+
+                return (
+                    a.distance -
+                    b.distance
+                );
+
+            }
+
+        );
+
+
+        /*
+           Show results.
+        */
+
+        displayPlaces(
+            places
+        );
+
+    }
+
+    catch (error) {
+
+        console.error(
+            "Overpass error:",
+            error
+        );
+
+
+        resultsCount.innerText =
+            "Unable to load";
+
+
+        placeResults.innerHTML = `
+
+            <div class="error">
+
+                ❌ We couldn't load nearby
+                healthcare locations right now.
+
+                <br><br>
+
+                Please check your internet connection
+                and try again.
+
+                <br><br>
+
+                <small>
+                    The map itself can still be used.
+                </small>
+
+            </div>
+
+        `;
+
+    }
+
+}
+
+
+/* =================================================
+   PROCESS OSM PLACES
+================================================= */
+
+function processPlaces(elements) {
+
+    const places = [];
+
+    const seenNames = new Set();
+
+
+    elements.forEach(
+
+        function(element) {
+
+            /*
+               Some OSM objects are nodes.
+               Ways/relations usually use center.
+            */
+
+            let lat = null;
+
+            let lng = null;
+
+
+            if (
+                typeof element.lat === "number" &&
+                typeof element.lon === "number"
+            ) {
+
+                lat = element.lat;
+
+                lng = element.lon;
+
+            }
+
+            else if (
+                element.center &&
+                typeof element.center.lat === "number" &&
+                typeof element.center.lon === "number"
+            ) {
+
+                lat =
+                    element.center.lat;
+
+                lng =
+                    element.center.lon;
+
+            }
+
+
+            if (
+                lat === null ||
+                lng === null
+            ) {
+
+                return;
+
+            }
+
+
+            const tags =
+                element.tags || {};
+
+
+            /*
+               Name.
+            */
+
+            const name =
+                tags.name ||
+                tags["name:en"] ||
+                (
+                    currentType === "hospital"
+                        ? "Nearby Hospital"
+                        : "Nearby Pharmacy"
+                );
+
+
+            /*
+               Prevent duplicate names.
+            */
+
+            const duplicateKey =
+                name.toLowerCase() +
+                "_" +
+                Math.round(lat * 10000) +
+                "_" +
+                Math.round(lng * 10000);
+
+
+            if (
+                seenNames.has(
+                    duplicateKey
+                )
+            ) {
+
+                return;
+
+            }
+
+
+            seenNames.add(
+                duplicateKey
+            );
+
+
+            /*
+               Calculate distance.
+            */
+
+            const distance =
+                calculateDistance(
+
+                    userLocation.lat,
+
+                    userLocation.lng,
+
+                    lat,
+
+                    lng
+
+                );
+
+
+            /*
+               Address.
+            */
+
+            const address =
+                buildAddress(tags);
+
+
+            /*
+               Phone.
+            */
+
+            const phone =
+                tags.phone ||
+                tags["contact:phone"] ||
+                "";
+
+
+            /*
+               Website.
+            */
+
+            const website =
+                tags.website ||
+                tags["contact:website"] ||
+                "";
+
+
+            /*
+               Opening hours.
+            */
+
+            const openingHours =
+                tags.opening_hours ||
+                "";
+
+
+            /*
+               Rating.
+
+               OSM does not guarantee a rating.
+
+               We ONLY use it if an OSM object
+               actually contains a rating/star tag.
+            */
+
+            const rating =
+                parseRating(tags);
+
+
+            places.push({
+
+                id:
+                    element.id,
+
+                name:
+                    name,
+
+                lat:
+                    lat,
+
+                lng:
+                    lng,
+
+                distance:
+                    distance,
+
+                address:
+                    address,
+
+                phone:
+                    phone,
+
+                website:
+                    website,
+
+                openingHours:
+                    openingHours,
+
+                rating:
+                    rating,
+
+                tags:
+                    tags
+
+            });
+
+        }
+
+    );
+
+
+    return places;
+
+}
+
+
+/* =================================================
+   BUILD ADDRESS
+================================================= */
+
+function buildAddress(tags) {
+
+    const parts = [];
+
+
+    if (tags["addr:housenumber"]) {
+
+        parts.push(
+            tags["addr:housenumber"]
+        );
+
+    }
+
+
+    if (tags["addr:street"]) {
+
+        parts.push(
+            tags["addr:street"]
+        );
+
+    }
+
+
+    if (tags["addr:suburb"]) {
+
+        parts.push(
+            tags["addr:suburb"]
+        );
+
+    }
+
+
+    if (tags["addr:city"]) {
+
+        parts.push(
+            tags["addr:city"]
+        );
+
+    }
+
+
+    if (tags["addr:postcode"]) {
+
+        parts.push(
+            tags["addr:postcode"]
+        );
+
+    }
+
+
+    if (parts.length > 0) {
+
+        return parts.join(", ");
+
+    }
+
+
+    return "Address information unavailable";
+
+}
+
+
+/* =================================================
+   PARSE RATING
+================================================= */
+
+function parseRating(tags) {
+
+    /*
+       OSM has no universal Google-style
+       review/rating field.
+
+       We check common rating-like tags
+       only if they exist.
+    */
+
+    const possibleRating =
+
+        tags.rating ||
+        tags.stars ||
+        tags["contact:rating"] ||
+        null;
+
+
+    if (!possibleRating) {
+
+        return null;
+
+    }
+
+
+    const number =
+        parseFloat(
+            possibleRating
+        );
+
+
+    if (
+        Number.isNaN(number)
+    ) {
+
+        return null;
+
+    }
+
+
+    return number;
+
+}
+
+
+/* =================================================
+   DISPLAY PLACES
+================================================= */
+
+function displayPlaces(places) {
+
+    /*
+       No results.
+    */
+
+    if (
+        places.length === 0
+    ) {
+
+        resultsCount.innerText =
+            "0 found";
+
+
+        placeResults.innerHTML = `
+
+            <div class="empty">
+
+                😔
+
+                <br><br>
+
+                No nearby
+                ${
+                    currentType === "hospital"
+                        ? "hospitals"
+                        : "pharmacies"
+                }
+                were found within 5 km.
+
+                <br><br>
+
+                Try refreshing your location
+                or zooming out on the map.
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    /*
+       Limit visible cards.
+
+       Map still has all returned markers.
+    */
+
+    const visiblePlaces =
+        places.slice(0, 20);
+
+
+    resultsCount.innerText =
+        `${places.length} found within 5 km`;
+
+
+    placeResults.innerHTML = "";
+
+
+    visiblePlaces.forEach(
+
+        function(place, index) {
+
+            /*
+               Create map marker.
+            */
+
+            const marker =
+                createPlaceMarker(
+                    place,
+                    index
+                );
+
+
+            placeMarkers.push(
+                marker
+            );
+
+
+            /*
+               Rating HTML.
+            */
+
+            let ratingHTML;
+
+
+            if (
+                place.rating !== null
+            ) {
+
+                const roundedRating =
+                    Math.max(
+                        1,
+                        Math.min(
+                            5,
+                            Math.round(
+                                place.rating
+                            )
+                        )
+                    );
+
+
+                const stars =
+                    "⭐".repeat(
+                        roundedRating
+                    );
+
+
+                ratingHTML = `
+
+                    <div class="rating">
+
+                        ${stars}
+                        ${place.rating}/5
+
+                    </div>
+
+                `;
+
+            }
+
+            else {
+
+                ratingHTML = `
+
+                    <div class="rating-unavailable">
+
+                        ⭐ Rating not available
+
+                    </div>
+
+                `;
+
+            }
+
+
+            /*
+               Opening status.
+            */
+
+            const openingHTML =
+                getOpeningStatus(
+                    place.openingHours
+                );
+
+
+            /*
+               Phone.
+            */
+
+            const phoneHTML =
+                place.phone
+                    ? `
+
+                        <p class="phone">
+
+                            📞
+                            ${escapeHTML(
+                                place.phone
+                            )}
+
+                        </p>
+
+                      `
+                    : "";
+
+
+            /*
+               Website.
+            */
+
+            const websiteHTML =
+                place.website
+                    ? `
+
+                        <a
+                            class="website-btn"
+                            href="${safeURL(
+                                place.website
+                            )}"
+                            target="_blank"
+                            rel="noopener noreferrer">
+
+                            🌐 Website
+
+                        </a>
+
+                      `
+                    : "";
+
+
+            /*
+               Directions.
+
+               This opens Google Maps directions
+               in a normal browser tab.
+
+               No Google API key is required
+               for this link.
+            */
+
+            const directionsURL =
+                "https://www.google.com/maps/dir/?api=1" +
+                "&destination=" +
+                encodeURIComponent(
+                    place.lat +
+                    "," +
+                    place.lng
+                );
+
+
+            /*
+               Card.
+            */
+
+            const card =
+                document.createElement(
+                    "article"
+                );
+
+
+            card.className =
+                "place-card";
+
+
+            card.innerHTML = `
+
+                <div class="place-icon">
+
+                    ${
+                        currentType === "hospital"
+                            ? "🏥"
+                            : "💊"
+                    }
+
+                </div>
+
+
+                <h3>
+
+                    ${escapeHTML(
+                        place.name
+                    )}
+
+                </h3>
+
+
+                ${ratingHTML}
+
+
+                <p class="address">
+
+                    📍
+
+                    ${escapeHTML(
+                        place.address
+                    )}
+
+                </p>
+
+
+                <p class="distance">
+
+                    📏
+                    ${formatDistance(
+                        place.distance
+                    )}
+                    away
+
+                </p>
+
+
+                ${openingHTML}
+
+
+                ${phoneHTML}
+
+
+                <div class="card-buttons">
+
+                    <a
+                        class="direction-btn"
+                        href="${directionsURL}"
+                        target="_blank"
+                        rel="noopener noreferrer">
+
+                        🗺️ Directions
+
+                    </a>
+
+
+                    ${websiteHTML}
+
+                </div>
+
+            `;
+
+
+            /*
+               Clicking card moves map.
+            */
+
+            card.addEventListener(
+
+                "click",
+
+                function(event) {
+
+                    /*
+                       Don't interfere with
+                       buttons/links.
+                    */
+
+                    if (
+                        event.target.closest(
+                            "a"
+                        )
+                    ) {
+
+                        return;
+
+                    }
+
+
+                    map.setView(
+
+                        [
+                            place.lat,
+                            place.lng
+                        ],
+
+                        17
+
+                    );
+
+
+                    marker.openPopup();
+
+                }
+
+            );
+
+
+            placeResults.appendChild(
+                card
+            );
+
+        }
+
+    );
+
+
+    /*
+       Show all results on map.
+    */
+
+    fitMapToPlaces(
+        places
+    );
+
+}
+
+
+/* =================================================
+   CREATE PLACE MARKER
+================================================= */
+
+function createPlaceMarker(
+    place,
+    index
+) {
+
+    const emoji =
+        currentType === "hospital"
+            ? "🏥"
+            : "💊";
+
+
+    const marker =
+        L.marker(
+
+            [
+                place.lat,
+                place.lng
+            ]
+
+        ).addTo(map);
+
+
+    marker.bindPopup(`
+
+        <strong>
+
+            ${emoji}
+            ${escapeHTML(
+                place.name
+            )}
+
+        </strong>
+
+        <br><br>
+
+        📏
+        ${formatDistance(
+            place.distance
+        )}
+        away
+
+    `);
+
+
+    return marker;
+
+}
+
+
+/* =================================================
+   FIT MAP TO PLACES
+================================================= */
+
+function fitMapToPlaces(
+    places
+) {
+
+    if (
+        !userLocation ||
+        places.length === 0
+    ) {
+
+        return;
+
+    }
+
+
+    const bounds =
+        L.latLngBounds();
+
+
+    /*
+       Add user.
+    */
+
+    bounds.extend(
+
+        [
+            userLocation.lat,
+            userLocation.lng
+        ]
+
+    );
+
+
+    /*
+       Add places.
+    */
+
+    places.forEach(
+
+        function(place) {
+
+            bounds.extend(
+
+                [
+                    place.lat,
+                    place.lng
+                ]
+
+            );
+
+        }
+
+    );
+
+
+    map.fitBounds(
+
+        bounds,
+
+        {
+
+            padding: [
+                40,
+                40
+            ],
+
+            maxZoom: 15
+
+        }
+
+    );
+
+}
+
+
+/* =================================================
+   OPENING STATUS
+================================================= */
+
+function getOpeningStatus(
+    openingHours
+) {
+
+    if (!openingHours) {
+
+        return `
+
+            <p class="unknown-status">
+
+                🕒 Opening hours unavailable
+
+            </p>
+
+        `;
+
+    }
+
+
+    /*
+       We don't attempt to guess
+       whether it's open.
+
+       We display the OSM hours exactly
+       as mapped.
+    */
+
+    return `
+
+        <p class="unknown-status">
+
+            🕒
+            ${escapeHTML(
+                openingHours
+            )}
+
+        </p>
+
+    `;
+
+}
+
+
+/* =================================================
+   CLEAR MARKERS
+================================================= */
+
+function clearPlaceMarkers() {
+
+    placeMarkers.forEach(
+
+        function(marker) {
+
+            map.removeLayer(
+                marker
+            );
+
+        }
+
+    );
+
+
+    placeMarkers = [];
+
+}
+
+
+/* =================================================
+   DISTANCE CALCULATION
+================================================= */
+
+function calculateDistance(
+    lat1,
+    lon1,
+    lat2,
+    lon2
+) {
+
+    const earthRadius =
+        6371;
+
+
+    const dLat =
+        toRadians(
+            lat2 - lat1
+        );
+
+
+    const dLon =
+        toRadians(
+            lon2 - lon1
+        );
+
+
+    const a =
+
+        Math.sin(
+            dLat / 2
+        ) *
+        Math.sin(
+            dLat / 2
+        )
+
+        +
+
+        Math.cos(
+            toRadians(lat1)
+        )
+
+        *
+
+        Math.cos(
+            toRadians(lat2)
+        )
+
+        *
+
+        Math.sin(
+            dLon / 2
+        ) *
+        Math.sin(
+            dLon / 2
+        );
+
+
+    const c =
+        2 *
+        Math.atan2(
+
+            Math.sqrt(a),
+
+            Math.sqrt(
+                1 - a
+            )
+
+        );
+
+
+    return (
+        earthRadius *
+        c
+    );
+
+}
+
+
+/* =================================================
+   DEGREES TO RADIANS
+================================================= */
+
+function toRadians(
+    degrees
+) {
+
+    return (
+        degrees *
+        Math.PI /
+        180
+    );
+
+}
+
+
+/* =================================================
+   FORMAT DISTANCE
+================================================= */
+
+function formatDistance(
+    distance
+) {
+
+    if (
+        distance < 1
+    ) {
+
+        return (
+            Math.round(
+                distance * 1000
+            ) +
+            " m"
+        );
+
+    }
+
+
+    return (
+        distance.toFixed(1) +
+        " km"
+    );
+
+}
+
+
+/* =================================================
+   ESCAPE HTML
+================================================= */
+
+function escapeHTML(
+    value
+) {
+
+    if (!value) {
+
+        return "";
+
+    }
+
+
+    return String(value)
+
+        .replace(
+            /&/g,
+            "&amp;"
+        )
+
+        .replace(
+            /</g,
+            "&lt;"
+        )
+
+        .replace(
+            />/g,
+            "&gt;"
+        )
+
+        .replace(
+            /"/g,
+            "&quot;"
+        )
+
+        .replace(
+            /'/g,
+            "&#039;"
+        );
+
+}
+
+
+/* =================================================
+   SAFE WEBSITE URL
+================================================= */
+
+function safeURL(
+    url
+) {
+
+    try {
+
+        const parsed =
+            new URL(
+                url,
+                window.location.href
+            );
+
+
+        if (
+            parsed.protocol ===
+                "http:" ||
+            parsed.protocol ===
+                "https:"
+        ) {
+
+            return parsed.href;
+
+        }
+
+    }
+
+    catch (error) {
+
+        console.error(error);
+
+    }
+
+
+    return "#";
+
+}
+
+
+/* =================================================
+   HOSPITAL TAB
+================================================= */
+
+hospitalTab.addEventListener(
+
+    "click",
+
+    function() {
+
+        currentType =
+            "hospital";
+
+
+        hospitalTab.classList.add(
+            "active"
+        );
+
+
+        pharmacyTab.classList.remove(
+            "active"
+        );
+
+
+        resultsTitle.innerText =
+            "Nearby Hospitals";
+
+
+        if (userLocation) {
+
+            searchNearbyPlaces();
+
+        }
+
+    }
+
+);
+
+
+/* =================================================
+   PHARMACY TAB
+================================================= */
+
+pharmacyTab.addEventListener(
+
+    "click",
+
+    function() {
+
+        currentType =
+            "pharmacy";
+
+
+        pharmacyTab.classList.add(
+            "active"
+        );
+
+
+        hospitalTab.classList.remove(
+            "active"
+        );
+
+
+        resultsTitle.innerText =
+            "Nearby Pharmacies";
+
+
+        if (userLocation) {
+
+            searchNearbyPlaces();
+
+        }
+
+    }
+
+);
+
+
+/* =================================================
+   LOCATION BUTTON
+================================================= */
+
+locationBtn.addEventListener(
+
+    "click",
+
+    function() {
+
+        getUserLocation();
+
+    }
+
+);
+
+
+/* =================================================
+   START MEDVERSE MAP
+================================================= */
+
+createMap();
+
+
+/*
+   Automatically request location
+   when page opens.
+*/
+
+getUserLocation();
+
+
+</script>
+
+
+</body>
+
+</html>

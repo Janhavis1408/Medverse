@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>Dashboard | MedVerse</title>
+
+    <link rel="stylesheet"
+        href="dashboard.css">
+        <link rel="stylesheet"
+      href="dashboard2.css">
+
+    <!-- Google Font -->
+
+    <link rel="preconnect"
+        href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Font Awesome -->
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+</head>
+
+
+<body>
+
+
+    <!-- ==========================================
+         SIDEBAR
+    ========================================== -->
+
+    <aside class="sidebar">
+
+
+        <!-- LOGO -->
+
+        <div class="logo">
+
+            <i class="fa-solid fa-heart-pulse"></i>
+
+            <h2>
+
+                MedVerse
+
+            </h2>
+
+        </div>
+
+
+        <!-- NAVIGATION -->
+
+        <ul>
+
+
+            <!-- Dashboard -->
+
+            <li>
+
+                <a href="dashboard.html">
+
+                    <i class="fa-solid fa-house"></i>
+
+                    Dashboard
+
+                </a>
+
+            </li>
+
+
+            <!-- AI Assistant -->
+
+            <li>
+
+                <a href="assistant.html">
+
+                    <i class="fa-solid fa-robot"></i>
+
+                    AI Assistant
+
+                </a>
+
+            </li>
+
+
+            
+
+            <!-- Medicine Reminder -->
+
+            <li>
+
+                <a href="reminder.html">
+
+                    <i class="fa-solid fa-pills"></i>
+
+                    Medicine Reminder
+
+                </a>
+
+            </li>
+
+
+            <!-- Hospitals -->
+
+            <li>
+
+                <a href="hospital.html">
+
+                    <i class="fa-solid fa-hospital"></i>
+
+                    Hospitals and Pharmacy
+
+                </a>
+
+            </li>
+
+
+            
+
+
+            <!-- Profile -->
+
+            <li>
+
+                <a href="profile.html">
+
+                    <i class="fa-solid fa-user"></i>
+
+                    Profile
+
+                </a>
+
+            </li>
+
+
+            <!-- Logout -->
+
+            <li>
+
+                <a
+                    href="#"
+                    id="logoutBtn">
+
+                    <i class="fa-solid fa-right-from-bracket"></i>
+
+                    Logout
+
+                </a>
+
+            </li>
+
+
+        </ul>
+
+
+    </aside>
+
+
+
+    <!-- ==========================================
+         MAIN CONTENT
+    ========================================== -->
+
+    <main class="main-content">
+
+
+        <!-- ==========================================
+             HEADER
+        ========================================== -->
+
+        <header class="dashboard-header">
+
+
+            <div>
+
+                <h1 id="welcomeText">
+
+                    Welcome Back 👋
+
+                </h1>
+
+
+                <p>
+
+                    Your AI Healthcare Dashboard
+
+                </p>
+
+            </div>
+
+
+            <div class="header-buttons">
+
+
+                <button
+                    type="button"
+                    id="languageBtn">
+
+                    🌐 English
+
+                </button>
+
+
+
+
+            </div>
+
+
+        </header>
+
+
+
+        <!-- ==========================================
+             AI DOCTOR CARD
+        ========================================== -->
+        <section class="doctor-card">
+
+    <div class="ai-welcome-content">
+
+        <span class="ai-label">
+            ✦ MEDVERSE AI
+        </span>
+
+        <h2>
+            Your Personal
+            <span>AI Healthcare Companion</span>
+        </h2>
+
+        <p>
+            Ask health questions, understand your symptoms,
+            get wellness guidance, and manage your healthcare
+            journey — all in one place.
+        </p>
+
+        <a href="assistant.html" class="consultation-btn">
+            Start Consultation
+            <i class="fa-solid fa-arrow-right"></i>
+        </a>
+
+    </div>
+
+
+    <div class="ai-visual">
+
+        <div class="ai-circle">
+
+            <i class="fa-solid fa-heart-pulse"></i>
+
+        </div>
+
+        <div class="ai-orbit orbit-one"></div>
+        <div class="ai-orbit orbit-two"></div>
+
+        <span class="floating-icon icon-one">💙</span>
+        <span class="floating-icon icon-two">✦</span>
+        <span class="floating-icon icon-three">+</span>
+
+        <div class="ai-status">
+            <span></span>
+            AI Assistant Online
+        </div>
+
+    </div>
+
+</section>
+
+        
+        <!-- ==========================================
+          /DASHBOARD CARDS
+        ========================================== -->
+
+        <section class="health-journey">
+
+    <div class="journey-heading">
+        <span>MEDVERSE HEALTH JOURNEY</span>
+        <h2>Your Healthcare, One Step at a Time</h2>
+        <p>
+            From consultation to care, everything is connected in one place.
+        </p>
+    </div>
+
+    <div class="journey-flow">
+
+        <!-- STEP 1 -->
+        <a href="assistant.html" class="journey-card">
+
+            <div class="journey-step">01</div>
+
+            <div class="journey-icon">
+                <i class="fa-solid fa-robot"></i>
+            </div>
+
+            <div>
+                <h3>AI Consultation</h3>
+                <p>Talk with your MedVerse AI assistant.</p>
+            </div>
+
+        </a>
+
+
+        <div class="journey-connector">
+            <i class="fa-solid fa-arrow-right"></i>
+        </div>
+
+
+        <!-- STEP 2 -->
+        <a href="assistant.html" class="journey-card">
+
+            <div class="journey-step">02</div>
+
+            <div class="journey-icon">
+                <i class="fa-solid fa-camera"></i>
+            </div>
+
+            <div>
+                <h3>Medical Image</h3>
+                <p>Upload an image for AI-assisted analysis.</p>
+            </div>
+
+        </a>
+
+
+        <div class="journey-connector">
+            <i class="fa-solid fa-arrow-right"></i>
+        </div>
+
+
+        <!-- STEP 3 -->
+        <a href="reminder.html" class="journey-card">
+
+            <div class="journey-step">03</div>
+
+            <div class="journey-icon">
+                <i class="fa-solid fa-pills"></i>
+            </div>
+
+            <div>
+                <h3>Medicine Reminder</h3>
+                <p>Never miss your daily medicines.</p>
+            </div>
+
+        </a>
+
+
+        <!-- SECOND ROW CONNECTOR -->
+        <div class="journey-turn">
+            <i class="fa-solid fa-arrow-down"></i>
+        </div>
+
+
+        <!-- STEP 4 -->
+        <a href="hospital.html" class="journey-card">
+
+            <div class="journey-step">04</div>
+
+            <div class="journey-icon">
+                <i class="fa-solid fa-hospital"></i>
+            </div>
+
+            <div>
+                <h3>Hospitals & Pharmacy</h3>
+                <p>Find nearby healthcare facilities.</p>
+            </div>
+
+        </a>
+
+
+        <div class="journey-connector journey-left">
+            <i class="fa-solid fa-arrow-left"></i>
+        </div>
+
+
+        <!-- STEP 5 -->
+        <a href="profile.html" class="journey-card">
+
+            <div class="journey-step">05</div>
+
+            <div class="journey-icon">
+                <i class="fa-solid fa-user-doctor"></i>
+            </div>
+
+            <div>
+                <h3>Health Profile</h3>
+                <p>Manage your personal health information.</p>
+            </div>
+
+        </a>
+
+    </div>
+
+</section>
+
+            
+                        
+
+
+        <!-- ==========================================
+             HEALTH SUMMARY
+        ========================================== -->
+
+        <section class="health-summary">
+
+
+            <h2>
+
+                Today's Health Summary
+
+            </h2>
+
+
+            <div class="summary-grid">
+
+
+                <!-- Medicines -->
+
+                <div class="summary-card">
+
+
+                    💊
+
+
+                    <h3>
+
+                        Medicines
+
+                    </h3>
+
+
+                    <p>
+
+                        take on time
+
+                    </p>
+
+
+                </div>
+
+
+
+                <!-- Water -->
+
+                <div class="summary-card">
+
+
+                    💧
+
+
+                    <h3>
+
+                        Water Intake
+
+                    </h3>
+
+
+                    <p>
+
+                        4 / 8 Glasses
+
+                    </p>
+
+
+                </div>
+
+
+
+                <!-- Sleep -->
+
+                <div class="summary-card">
+
+
+                    😴
+
+
+                    <h3>
+
+                        Sleep
+
+                    </h3>
+
+
+                    <p>
+
+                        7-8 Hours
+
+                    </p>
+
+
+                </div>
+
+
+
+                <!-- Wellness -->
+
+                <div class="summary-card">
+
+
+                    ❤️
+
+
+                    <h3>
+
+                        Wellness
+
+                    </h3>
+
+
+                    <p>
+
+                        Keep up the good work!
+
+                    </p>
+
+
+                </div>
+
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- ==========================================
+             EMERGENCY
+        ========================================== -->
+
+        <section class="emergency-box">
+
+
+            <div>
+
+
+                <h2>
+
+                    🚨 Emergency Assistance
+
+                </h2>
+
+
+                <p>
+
+                    Quickly access emergency numbers
+                    and nearby hospitals.
+
+                </p>
+
+
+            </div>
+
+
+            <button
+                type="button"
+                id="emergencyBtn">
+
+                Emergency Help
+
+            </button>
+
+
+        </section>
+
+
+    </main>
+
+
+
+    <!-- ==========================================
+         DASHBOARD JAVASCRIPT
+    ========================================== -->
+
+    <script>
+
+
+        // ==========================================
+        // CHECK LOGIN
+        // ==========================================
+
+        const savedUser =
+            localStorage.getItem("medverseUser");
+
+
+        if (!savedUser) {
+
+
+            // User is not logged in
+
+            window.location.href =
+                "login.html";
+
+
+        }
+
+
+        // ==========================================
+        // GET USER INFORMATION
+        // ==========================================
+
+        let currentUser = null;
+
+
+        try {
+
+
+            currentUser =
+                JSON.parse(savedUser);
+
+
+        } catch (error) {
+
+
+            console.error(
+                "Unable to read user information.",
+                error
+            );
+
+
+            localStorage.removeItem(
+                "medverseUser"
+            );
+
+
+            window.location.href =
+                "login.html";
+
+
+        }
+
+
+
+        // ==========================================
+        // DISPLAY USER NAME
+        // ==========================================
+
+        if (currentUser) {
+
+
+            const welcomeText =
+                document.getElementById(
+                    "welcomeText"
+                );
+
+
+            const doctorUserName =
+                document.getElementById(
+                    "doctorUserName"
+                );
+
+
+            const userName =
+                currentUser.name ||
+                "User";
+
+
+            welcomeText.textContent =
+                `Welcome Back, ${userName} 👋`;
+
+
+            doctorUserName.textContent =
+                userName;
+
+
+        }
+
+
+
+        // ==========================================
+        // LOGOUT
+        // ==========================================
+
+        const logoutBtn =
+            document.getElementById(
+                "logoutBtn"
+            );
+
+
+        logoutBtn.addEventListener(
+            "click",
+            function (event) {
+
+
+                event.preventDefault();
+
+
+                const confirmLogout =
+                    confirm(
+                        "Are you sure you want to logout?"
+                    );
+
+
+                if (!confirmLogout) {
+
+                    return;
+
+                }
+
+
+                // Remove logged-in user
+
+                localStorage.removeItem(
+                    "medverseUser"
+                );
+
+
+                // Go to home page
+
+                window.location.href =
+                    "index.html";
+
+
+            }
+        );
+
+
+
+        // ==========================================
+        // EMERGENCY BUTTON
+        // ==========================================
+
+        const emergencyBtn =
+            document.getElementById(
+                "emergencyBtn"
+            );
+
+
+        emergencyBtn.addEventListener(
+            "click",
+            function () {
+
+
+                window.location.href =
+                    "hospital.html";
+
+
+            }
+        );
+
+
+
+        // ==========================================
+        // LANGUAGE BUTTON
+        // ==========================================
+
+        const languageBtn =
+            document.getElementById(
+                "languageBtn"
+            );
+
+
+        languageBtn.addEventListener(
+            "click",
+            function () {
+
+
+                alert(
+                    "Hindi / English language switching will be added next."
+                );
+
+
+            }
+        );
+
+
+
+        
+
+
+
+        
+
+    </script>
+
+
+</body>
+
+</html>

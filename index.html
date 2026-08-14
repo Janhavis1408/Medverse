@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>MedVerse | AI Healthcare Companion</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css">
+    
+
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+</head>
+
+<body>
+
+    <!-- ================= NAVBAR ================= -->
+
+    <header>
+
+        <nav class="navbar">
+
+            <div class="logo">
+
+                <i class="fa-solid fa-heart-pulse"></i>
+
+                <span>MedVerse</span>
+
+            </div>
+
+            <ul class="nav-links">
+
+                <li><a href="#">Home</a></li>
+
+                <li><a href="#">Features</a></li>
+
+                <li><a href="#">About</a></li>
+
+                <li><a href="#">Contact</a></li>
+
+            </ul>
+
+            <div class="nav-buttons">
+
+                <button class="language-btn">
+
+                    🌐 English
+
+                </button>
+
+               
+
+                <a href="login.html">
+
+                    <button class="login-btn">
+
+                        Login
+
+                    </button>
+
+                </a>
+
+                <a href="signup.html">
+
+                    <button class="signup-btn">
+
+                        Sign Up
+
+                    </button>
+
+                </a>
+
+            </div>
+
+        </nav>
+
+    </header>
+
+    <!-- ================= HERO SECTION ================= -->
+
+    <section class="hero">
+
+        <div class="hero-left">
+
+            <span class="tag">
+
+                AI Powered Healthcare
+
+            </span>
+
+            <h1>
+
+                Your Personal
+
+                <span>
+
+                    AI Healthcare
+
+                </span>
+
+                Companion
+
+            </h1>
+
+            <p>
+
+                Describe your symptoms.
+
+                Upload medical images.
+
+                Find nearby hospitals & pharmacies.
+
+                Set medicine reminders.
+
+                Talk with your AI Doctor anytime.
+
+            </p>
+            <div class="hero-buttons">
+
+    <button
+        class="primary-btn"
+        onclick="window.location.href='assistant.html'">
+
+        <i class="fa-solid fa-comment-medical"></i>
+        Start Consultation
+
+    </button>
+
+    <button
+        class="secondary-btn"
+        onclick="window.location.href='assistant.html'">
+
+        <i class="fa-solid fa-camera"></i>
+        Upload Medical Image
+
+    </button>
+    
+</div>
+            <div class="small-features">
+
+                <div>
+
+                    ✔ AI Assistant
+
+                </div>
+
+                <div>
+
+                    ✔ Voice Support
+
+                </div>
+
+                <div>
+
+                    ✔ Hindi + English
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Doctor -->
+
+        <div class="hero-right">
+
+            <img src="doctor.png" alt="Doctor">
+
+        </div>
+
+    </section>
+
+    <!-- ================= AI CARD ================= -->
+
+    <section class="assistant-preview">
+
+        <button
+    class="primary-btn"
+    onclick="window.location.href='assistant.html'">
+
+    Talk With Me
+
+</button>
+
+    <!-- ================= QUICK ACCESS ================= -->
+
+    <section class="quick-access">
+
+        <h2>
+
+            Quick Access
+
+        </h2>
+
+        <!-- AI CONSULTATION -->
+<div class="quick-card"
+     onclick="window.location.href='assistant.html'">
+
+    <i class="fa-solid fa-user-doctor"></i>
+
+    <h3>
+        AI Consultation
+    </h3>
+
+</div>
+
+            <!-- MEDICINE REMINDER -->
+<div class="quick-card"
+     onclick="window.location.href='reminder.html'">
+
+    <i class="fa-solid fa-pills"></i>
+
+    <h3>
+        Medicine Reminder
+    </h3>
+
+</div>
+
+            <!-- Nearby Hospitals -->
+<div class="quick-card"
+     onclick="window.location.href='hospital.html'">
+
+    <i class="fa-solid fa-hospital"></i>
+
+    <h3>
+        Nearby Hospitals
+    </h3>
+
+</div>
+
+
+<!-- Nearby Pharmacy -->
+<div class="quick-card"
+     onclick="window.location.href='hospital.html'">
+
+    <i class="fa-solid fa-location-dot"></i>
+
+    <h3>
+        Nearby Pharmacy
+    </h3>
+
+</div>
+
+            <!-- VOICE ASSISTANT -->
+<div class="quick-card"
+     onclick="window.location.href='assistant.html'">
+
+    <i class="fa-solid fa-microphone"></i>
+
+    <h3>
+        Voice Assistant
+    </h3>
+
+</div>
+
+            <!-- EMERGENCY HELP -->
+<div class="quick-card"
+     onclick="window.location.href='hospital.html'">
+
+    <i class="fa-solid fa-truck-medical"></i>
+
+    <h3>
+        Emergency Help
+    </h3>
+
+</div>
+
+        </div>
+
+    </section>
+    <!-- ================= STATISTICS ================= -->
+
+<section class="statistics">
+
+    <h2 class="section-title">
+
+        Trusted Healthcare Companion
+
+    </h2>
+
+    <p class="section-subtitle">
+
+        Built to provide fast, smart, and accessible healthcare assistance.
+
+    </p>
+
+    <div class="stats-container">
+
+
+        <div class="stat-card">
+
+            <i class="fa-solid fa-heart-pulse"></i>
+
+            <h2>24/7</h2>
+
+            <p>AI Availability</p>
+
+        </div>
+
+        <div class="stat-card">
+
+            <i class="fa-solid fa-language"></i>
+
+            <h2>2</h2>
+
+            <p>Languages Supported</p>
+
+        </div>
+
+        <div class="stat-card">
+
+            <i class="fa-solid fa-shield-heart"></i>
+
+            <h2>100%</h2>
+
+            <p>Privacy Focused</p>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ================= FEATURES ================= -->
+
+<section class="features">
+
+    <h2 class="section-title">
+
+        Why Choose MedVerse?
+
+    </h2>
+
+    <p class="section-subtitle">
+
+        One platform for AI healthcare guidance, reminders, 
+        and nearby healthcare services.
+
+    </p>
+
+    <div class="feature-grid">
+
+        <div class="feature-card">
+
+            <i class="fa-solid fa-robot"></i>
+
+            <h3>AI Doctor</h3>
+
+            <p>
+
+                Talk with an intelligent healthcare assistant
+                anytime.
+
+            </p>
+
+        </div>
+
+        <div class="feature-card">
+
+            <i class="fa-solid fa-camera"></i>
+
+            <h3>Medical Image Upload</h3>
+
+            <p>
+
+                Upload skin rashes, wounds, burns,
+                and other medical images for AI review.
+
+            </p>
+
+        </div>
+
+        <div class="feature-card">
+
+            <i class="fa-solid fa-pills"></i>
+
+            <h3>Medicine Reminder</h3>
+
+            <p>
+
+                Never miss your medicines with
+                smart reminders.
+
+            </p>
+
+        </div>
+
+        <div class="quick-card"
+     onclick="window.location.href='hospital.html'">
+
+    <i class="fa-solid fa-hospital"></i>
+
+    <h3>
+        Nearby Hospitals
+    </h3>
+
+      </div>
+<div class="quick-card"
+     onclick="window.location.href='hospital.html'">
+
+    <i class="fa-solid fa-location-dot"></i>
+
+    <h3>
+        Nearby Pharmacy
+    </h3>
+
+</div>
+
+        <div class="feature-card">
+
+            <i class="fa-solid fa-microphone-lines"></i>
+
+            <h3>Voice Assistant</h3>
+
+            <p>
+
+                Speak naturally in Hindi or English.
+
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ================= HOW IT WORKS ================= -->
+
+<section class="how-it-works">
+
+    <h2 class="section-title">
+
+        How MedVerse Works
+
+    </h2>
+
+    <div class="timeline">
+
+        <div class="step">
+
+            <span>1</span>
+
+            <h3>
+
+                Describe Your Symptoms
+
+            </h3>
+
+            <p>
+
+                Tell the AI what you're experiencing.
+
+            </p>
+
+        </div>
+
+        <div class="step">
+
+            <span>2</span>
+
+            <h3>
+
+                Upload Medical Image
+
+            </h3>
+
+            <p>
+
+                Upload a medical image if needed.
+
+            </p>
+
+        </div>
+
+        <div class="step">
+
+            <span>3</span>
+
+            <h3>
+
+                AI Health Guidance
+
+            </h3>
+
+            <p>
+
+                Receive general guidance and wellness
+                suggestions.
+
+            </p>
+
+        </div>
+
+        <div class="step">
+
+            <span>4</span>
+
+            <h3>
+
+                Find Nearby Help
+
+            </h3>
+
+            <p>
+
+                Locate hospitals and pharmacies
+                around you.
+
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+
+
+
+<!-- JavaScript -->
+
+<script src="app.js"></script>
+
+
+</body>
+
+</html>
+

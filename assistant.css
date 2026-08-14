@@ -1,0 +1,754 @@
+/* =========================================================
+   MEDVERSE AI ASSISTANT
+   Premium Healthcare UI
+========================================================= */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: "Poppins", sans-serif;
+    background: #f4f8ff;
+    color: #17233d;
+}
+
+/* =========================================================
+   NAVBAR
+========================================================= */
+
+.navbar {
+    height: 72px;
+    padding: 0 45px;
+    background: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 4px 20px rgba(20, 50, 100, 0.08);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 24px;
+    font-weight: 700;
+    color: #2167e8;
+}
+
+.logo i {
+    font-size: 28px;
+}
+
+.nav-links {
+    display: flex;
+    gap: 30px;
+    list-style: none;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #52617a;
+    font-weight: 500;
+    transition: 0.3s;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+    color: #2167e8;
+}
+
+/* =========================================================
+   MAIN LAYOUT
+========================================================= */
+
+.assistant-container {
+    width: min(1400px, 94%);
+    margin: 35px auto;
+    display: grid;
+    grid-template-columns: 320px 1fr;
+    gap: 28px;
+    align-items: start;
+}
+
+.left-panel,
+.right-panel {
+    min-width: 0;
+}
+
+.left-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.right-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+/* =========================================================
+   DOCTOR CARD
+========================================================= */
+
+.doctor-card {
+    background: white;
+    border-radius: 25px;
+    padding: 30px 25px;
+    text-align: center;
+    box-shadow: 0 15px 40px rgba(32, 78, 140, 0.10);
+    border: 1px solid #e8effa;
+}
+
+.doctor-image {
+    width: 170px;
+    height: 170px;
+    object-fit: contain;
+    border-radius: 50%;
+    margin-bottom: 15px;
+    background: #eef6ff;
+}
+
+.doctor-card h2 {
+    font-size: 22px;
+    margin-bottom: 10px;
+    color: #17233d;
+}
+
+.doctor-card p {
+    color: #6b7890;
+    font-size: 14px;
+    line-height: 1.7;
+}
+
+.doctor-status {
+    margin-top: 18px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #16a05d;
+}
+
+.online-dot {
+    width: 11px;
+    height: 11px;
+    background: #18c66f;
+    border-radius: 50%;
+    box-shadow: 0 0 0 5px rgba(24, 198, 111, 0.12);
+}
+
+/* =========================================================
+   QUICK ACTIONS
+========================================================= */
+
+.quick-actions {
+    background: white;
+    padding: 25px;
+    border-radius: 22px;
+    box-shadow: 0 15px 40px rgba(32, 78, 140, 0.08);
+    border: 1px solid #e8effa;
+}
+
+.quick-actions h3 {
+    margin-bottom: 15px;
+    color: #17233d;
+    font-size: 19px;
+}
+
+.quick-btn {
+    width: 100%;
+    padding: 14px 16px;
+    margin-top: 10px;
+    border: none;
+    border-radius: 13px;
+    background: #edf4ff;
+    color: #24324d;
+    font-family: inherit;
+    font-size: 14px;
+    cursor: pointer;
+    transition: 0.25s;
+}
+
+.quick-btn:hover {
+    background: #2167e8;
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(33, 103, 232, 0.25);
+}
+
+/* =========================================================
+   CHAT HEADER
+========================================================= */
+
+.chat-header {
+    min-height: 125px;
+    padding: 25px 30px;
+    border-radius: 25px 25px 0 0;
+    background: linear-gradient(135deg, #2869eb, #17b8aa);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.chat-header h2 {
+    font-size: 25px;
+    margin-bottom: 6px;
+}
+
+.chat-header p {
+    font-size: 14px;
+    opacity: 0.9;
+}
+
+/* =========================================================
+   HEADER BUTTONS
+========================================================= */
+
+.header-buttons {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.header-buttons select {
+    height: 45px;
+    padding: 0 12px;
+    border: none;
+    border-radius: 10px;
+    background: white;
+    color: #24324d;
+    font-family: inherit;
+    cursor: pointer;
+}
+
+.clear-chat,
+.export-chat {
+    width: 45px;
+    height: 45px;
+    border: none;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.95);
+    color: #2167e8;
+    cursor: pointer;
+    transition: 0.25s;
+}
+
+.clear-chat:hover,
+.export-chat:hover {
+    transform: scale(1.08);
+    background: white;
+}
+
+/* =========================================================
+   CHAT BOX
+========================================================= */
+
+.chat-box {
+    height: 520px;
+    background: white;
+    border-radius: 0 0 25px 25px;
+    box-shadow: 0 15px 40px rgba(32, 78, 140, 0.10);
+    overflow-y: auto;
+    padding: 28px;
+}
+
+.chat-messages {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* =========================================================
+   MESSAGES
+========================================================= */
+
+.message {
+    display: flex;
+    align-items: flex-end;
+    gap: 10px;
+}
+
+.ai-message {
+    justify-content: flex-start;
+}
+
+.user-message {
+    justify-content: flex-end;
+}
+
+.avatar {
+    width: 38px;
+    height: 38px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #e9f2ff;
+    color: #2167e8;
+}
+
+.user-message .avatar {
+    background: #2167e8;
+    color: white;
+}
+
+.bubble {
+    max-width: 72%;
+    padding: 15px 18px;
+    border-radius: 18px;
+    line-height: 1.65;
+    font-size: 14px;
+}
+
+.ai-message .bubble {
+    background: #eef5ff;
+    color: #24324d;
+    border-bottom-left-radius: 5px;
+}
+
+.user-message .bubble {
+    background: #2167e8;
+    color: white;
+    border-bottom-right-radius: 5px;
+}
+
+/* =========================================================
+   TYPING
+========================================================= */
+
+.typing-area {
+    display: none;
+}
+
+.typing-animation span {
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    margin: 3px;
+    border-radius: 50%;
+    background: #2167e8;
+    animation: typing 1s infinite;
+}
+
+.typing-animation span:nth-child(2) {
+    animation-delay: 0.15s;
+}
+
+.typing-animation span:nth-child(3) {
+    animation-delay: 0.3s;
+}
+
+@keyframes typing {
+    0%, 100% {
+        opacity: 0.3;
+        transform: translateY(0);
+    }
+
+    50% {
+        opacity: 1;
+        transform: translateY(-4px);
+    }
+}
+
+/* =========================================================
+   CHAT INPUT
+========================================================= */
+
+.chat-input-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px;
+    background: white;
+    border-radius: 18px;
+    box-shadow: 0 10px 30px rgba(32, 78, 140, 0.08);
+}
+
+.chat-input-container input[type="text"] {
+    flex: 1;
+    height: 48px;
+    border: none;
+    outline: none;
+    background: #f4f7fc;
+    border-radius: 12px;
+    padding: 0 16px;
+    font-family: inherit;
+    font-size: 14px;
+    color: #17233d;
+}
+
+.chat-input-container input[type="text"]::placeholder {
+    color: #8995a8;
+}
+
+.icon-btn,
+.voice-btn,
+.send-btn {
+    width: 46px;
+    height: 46px;
+    border: none;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: 0.25s;
+}
+
+.icon-btn {
+    background: #eaf2ff;
+    color: #2167e8;
+}
+
+.voice-btn {
+    background: #eaf8f7;
+    color: #11a99c;
+}
+
+.send-btn {
+    background: #2167e8;
+    color: white;
+}
+
+.icon-btn:hover,
+.voice-btn:hover,
+.send-btn:hover {
+    transform: scale(1.08);
+}
+
+/* =========================================================
+   IMAGE PREVIEW
+========================================================= */
+
+.image-preview {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.image-preview img {
+    max-width: 240px;
+    max-height: 180px;
+    object-fit: contain;
+    border-radius: 15px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+}
+
+/* =========================================================
+   CHAT FOOTER
+========================================================= */
+
+.chat-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 8px;
+    color: #738198;
+    font-size: 12px;
+}
+
+.assistant-status {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+}
+
+.status-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #18c66f;
+}
+
+/* =========================================================
+   QUICK HEALTH TOOLS
+========================================================= */
+
+.health-tools {
+    margin-top: 15px;
+}
+
+.health-tools > h2 {
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: #17233d;
+}
+
+.tool-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px;
+}
+
+.tool-card {
+    background: white;
+    border: 1px solid #e8effa;
+    border-radius: 20px;
+    padding: 24px;
+    box-shadow: 0 10px 30px rgba(32, 78, 140, 0.07);
+    transition: 0.3s;
+}
+
+.tool-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(32, 78, 140, 0.13);
+}
+
+.tool-icon {
+    width: 52px;
+    height: 52px;
+    border-radius: 15px;
+    background: #edf4ff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 25px;
+    margin-bottom: 15px;
+}
+
+.tool-card h3 {
+    color: #17233d;
+    margin-bottom: 8px;
+}
+
+.tool-card p {
+    color: #738198;
+    font-size: 13px;
+    line-height: 1.6;
+    margin-bottom: 15px;
+}
+
+.tool-btn {
+    border: none;
+    background: #2167e8;
+    color: white;
+    padding: 10px 18px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-family: inherit;
+    font-weight: 600;
+}
+
+.tool-btn:hover {
+    background: #1555c9;
+}
+
+/* =========================================================
+   EMERGENCY
+========================================================= */
+
+.emergency-section {
+    margin-top: 25px;
+}
+
+.emergency-card {
+    background: linear-gradient(135deg, #ff5c5c, #ef3d3d);
+    color: white;
+    padding: 28px;
+    border-radius: 22px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    box-shadow: 0 15px 35px rgba(239, 61, 61, 0.18);
+}
+
+.emergency-icon {
+    font-size: 40px;
+}
+
+.emergency-content {
+    flex: 1;
+}
+
+.emergency-content h2 {
+    margin-bottom: 6px;
+}
+
+.emergency-content p {
+    font-size: 13px;
+    line-height: 1.6;
+    opacity: 0.95;
+}
+
+.emergency-btn {
+    border: none;
+    background: white;
+    color: #e43d3d;
+    padding: 13px 20px;
+    border-radius: 12px;
+    font-family: inherit;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+/* =========================================================
+   HEALTH TIPS
+========================================================= */
+
+.health-tip-section {
+    margin-top: 30px;
+}
+
+.health-tip-section h2 {
+    margin-bottom: 20px;
+}
+
+.tips-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+}
+
+.tip-card {
+    background: white;
+    padding: 20px;
+    border-radius: 18px;
+    border: 1px solid #e8effa;
+}
+
+.tip-card h3 {
+    margin: 10px 0;
+    font-size: 16px;
+}
+
+.tip-card p {
+    color: #738198;
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+/* =========================================================
+   DISCLAIMER
+========================================================= */
+
+.medical-disclaimer {
+    margin-top: 30px;
+}
+
+.disclaimer-card {
+    background: #fff9e9;
+    border: 1px solid #f6dfa0;
+    border-radius: 20px;
+    padding: 25px;
+    display: flex;
+    gap: 20px;
+}
+
+.disclaimer-icon {
+    color: #d59b00;
+    font-size: 25px;
+}
+
+.disclaimer-content h2 {
+    margin-bottom: 10px;
+}
+
+.disclaimer-content p {
+    color: #6f6240;
+    font-size: 13px;
+    line-height: 1.7;
+    margin-bottom: 8px;
+}
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+.assistant-footer {
+    margin-top: 50px;
+    padding: 35px;
+    background: #17233d;
+    color: white;
+    text-align: center;
+}
+
+.footer-logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.footer-logo i {
+    color: #4f8cff;
+}
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 1000px) {
+
+    .assistant-container {
+        grid-template-columns: 1fr;
+    }
+
+    .tool-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .tips-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (max-width: 650px) {
+
+    .navbar {
+        padding: 0 18px;
+    }
+
+    .nav-links {
+        gap: 12px;
+        font-size: 12px;
+    }
+
+    .assistant-container {
+        width: 95%;
+        margin: 20px auto;
+    }
+
+    .chat-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .header-buttons {
+        width: 100%;
+    }
+
+    .header-buttons select {
+        flex: 1;
+    }
+
+    .tool-grid,
+    .tips-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .emergency-card {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .emergency-btn {
+        width: 100%;
+    }
+
+    .bubble {
+        max-width: 85%;
+    }
+}

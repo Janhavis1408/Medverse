@@ -1,0 +1,696 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>MedVerse AI Assistant</title>
+
+    <link rel="stylesheet" href="dashboard.css">
+    <link rel="stylesheet" href="assistant.css">
+
+    <link rel="preconnect"
+          href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+          rel="stylesheet">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+</head>
+
+<body>
+
+<!-- ==========================================
+     NAVBAR
+========================================== -->
+
+<nav class="navbar">
+
+    <div class="logo">
+
+        <i class="fa-solid fa-heart-pulse"></i>
+
+        <span>MedVerse</span>
+
+    </div>
+
+    <ul class="nav-links">
+
+        <li><a href="dashboard.html">Dashboard</a></li>
+
+        <li><a href="assistant.html" class="active">AI Assistant</a></li>
+
+        
+
+        <li><a href="profile.html">Profile</a></li>
+
+    </ul>
+
+</nav>
+
+<!-- ==========================================
+     MAIN CONTAINER
+========================================== -->
+
+<div class="assistant-container">
+
+<!-- ==========================================
+     LEFT PANEL
+========================================== -->
+
+<div class="left-panel">
+
+    <div class="doctor-card">
+
+        <img src="doctor.png"
+             alt="AI Doctor"
+             class="doctor-image">
+
+        <h2>
+
+            Dr. MedVerse AI
+
+        </h2>
+
+        <p>
+
+            Your intelligent healthcare companion.
+
+            Ask health questions, upload images,
+
+            or speak naturally.
+
+        </p>
+
+        <div class="doctor-status">
+
+            <span class="online-dot"></span>
+
+            <span>
+
+                Online 24/7
+
+            </span>
+
+        </div>
+
+    </div>
+
+<!-- QUICK ACTIONS -->
+
+<div class="quick-actions">
+
+<h3>
+
+Quick Actions
+
+</h3>
+
+<button class="quick-btn">
+
+🤒 Fever
+
+</button>
+
+<button class="quick-btn">
+
+🤧 Cold & Cough
+
+</button>
+
+<button class="quick-btn">
+
+🤕 Headache
+
+</button>
+
+<button class="quick-btn">
+
+🤢 Stomach Pain
+
+</button>
+
+<button class="quick-btn">
+
+😴 Fatigue
+
+</button>
+
+<button class="quick-btn">
+
+🩹 Skin Rash
+
+</button>
+
+</div>
+
+</div>
+
+<!-- ==========================================
+     RIGHT PANEL
+========================================== -->
+
+<div class="right-panel">
+
+<div class="chat-header">
+
+<div>
+
+<h2>
+
+AI Healthcare Assistant
+
+</h2>
+
+<p>
+
+Describe symptoms or upload a medical image.
+
+</p>
+
+</div>
+
+<div class="header-buttons">
+
+    <select id="language">
+
+    <option value="en-US">
+        English
+    </option>
+
+    <option value="hi-IN">
+        हिन्दी
+    </option>
+
+</select>
+
+    <button class="clear-chat">
+        <i class="fa-solid fa-trash"></i>
+    </button>
+
+    <button class="export-chat">
+        <i class="fa-solid fa-download"></i>
+    </button>
+
+   
+
+</div>
+
+</div>
+<!-- ==========================================
+     CHAT AREA
+========================================== -->
+
+<div class="chat-box">
+
+    <div class="chat-messages">
+
+        <!-- AI Welcome Message -->
+
+        <div class="message ai-message">
+
+            <div class="avatar ai-avatar">
+
+                <i class="fa-solid fa-user-doctor"></i>
+
+            </div>
+
+            <div class="bubble">
+
+                👋 Hello! I'm <strong>Dr. MedVerse AI</strong>.
+
+                <br><br>
+
+                I'm here to provide general health information,
+                wellness tips, and help you understand your symptoms.
+
+                <br><br>
+
+                <strong>How can I help you today?</strong>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Typing Animation -->
+
+    <div class="typing-area">
+
+        <div class="typing-animation">
+
+            <span></span>
+
+            <span></span>
+
+            <span></span>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- ==========================================
+     CHAT INPUT
+========================================== -->
+
+<div class="chat-input-container">
+
+    <!-- Image Upload -->
+
+    <label for="imageUpload" class="icon-btn">
+
+        <i class="fa-solid fa-image"></i>
+
+    </label>
+
+    <input
+        type="file"
+        id="imageUpload"
+        accept="image/*"
+        hidden>
+
+    <!-- Voice Button -->
+
+    <button
+        class="voice-btn">
+
+        <i class="fa-solid fa-microphone"></i>
+
+    </button>
+
+    <!-- Chat Input -->
+
+    <input
+        type="text"
+        id="chatInput"
+        placeholder="Describe your symptoms here...">
+
+    <!-- Send Button -->
+
+    <button
+        class="send-btn">
+
+        <i class="fa-solid fa-paper-plane"></i>
+
+    </button>
+
+</div>
+
+<!-- ==========================================
+     IMAGE PREVIEW
+========================================== -->
+<div class="image-preview" id="imagePreview">
+
+</div>
+
+<!-- ==========================================
+     CHAT FOOTER
+========================================== -->
+
+<div class="chat-footer">
+
+    <div class="message-count">
+
+        Messages : 0
+
+    </div>
+
+    <div class="assistant-status">
+
+        <span class="status-dot"></span>
+
+        AI Ready
+
+    </div>
+
+</div>
+<!-- ==========================================
+     QUICK HEALTH TOOLS
+========================================== -->
+
+<section class="health-tools">
+
+    <h2>
+
+        Quick Health Tools
+
+    </h2>
+
+    <div class="tool-grid">
+
+        <!-- Medicine Reminder -->
+
+        <div class="tool-card">
+
+            <div class="tool-icon">
+
+                💊
+
+            </div>
+
+            <h3>
+
+                Medicine Reminder
+
+            </h3>
+
+            <p>
+
+                Schedule medicine reminders so you never miss a dose.
+
+            </p>
+
+            <a href="reminder.html">
+
+                <button class="tool-btn">
+
+                    Open
+
+                </button>
+
+            </a>
+
+        </div>
+
+        <!-- Nearby Hospital -->
+
+        <div class="tool-card">
+
+            <div class="tool-icon">
+
+                🏥
+
+            </div>
+
+            <h3>
+
+                Nearby Hospitals
+
+            </h3>
+
+            <p>
+
+                Locate hospitals near your location with Google Maps.
+
+            </p>
+
+            <a href="hospital.html">
+
+                <button class="tool-btn">
+
+                    View Hospitals
+
+                </button>
+
+            </a>
+
+        </div>
+
+        <!-- Profile -->
+
+        <div class="tool-card">
+
+            <div class="tool-icon">
+
+                👤
+
+            </div>
+
+            <h3>
+
+                Health Profile
+
+            </h3>
+
+            <p>
+
+                Update your medical information for personalized assistance.
+
+            </p>
+
+            <a href="profile.html">
+
+                <button class="tool-btn">
+
+                    View Profile
+
+                </button>
+
+            </a>
+
+        </div>
+
+        
+
+    </div>
+
+</section>
+
+<!-- ==========================================
+     EMERGENCY CARD
+========================================== -->
+
+<section class="emergency-section">
+
+    <div class="emergency-card">
+
+        <div class="emergency-icon">
+
+            🚨
+
+        </div>
+
+        <div class="emergency-content">
+    
+            <h2>
+
+                Medical Emergency?
+
+            </h2>
+
+            <p>
+
+                If you have severe chest pain, difficulty breathing,
+                heavy bleeding, or loss of consciousness,
+                seek emergency medical help immediately.
+
+            </p>
+
+        </div>
+
+        <button class="emergency-btn">
+
+            Emergency Help
+
+        </button>
+
+    </div>
+
+</section>
+
+<!-- ==========================================
+     DAILY HEALTH TIPS
+========================================== -->
+
+<section class="health-tip-section">
+
+    <h2>
+
+        Daily Wellness Tips
+
+    </h2>
+
+    <div class="tips-grid">
+
+        <div class="tip-card">
+
+            💧
+
+            <h3>
+
+                Stay Hydrated
+
+            </h3>
+
+            <p>
+
+                Drink 2–3 liters of water daily.
+
+            </p>
+
+        </div>
+
+        <div class="tip-card">
+
+            🥗
+
+            <h3>
+
+                Healthy Diet
+
+            </h3>
+
+            <p>
+
+                Eat fruits, vegetables and balanced meals.
+
+            </p>
+
+        </div>
+
+        <div class="tip-card">
+
+            😴
+
+            <h3>
+
+                Good Sleep
+
+            </h3>
+
+            <p>
+
+                Aim for 7–8 hours of sleep every night.
+
+            </p>
+
+        </div>
+
+        <div class="tip-card">
+
+            🚶
+
+            <h3>
+
+                Stay Active
+
+            </h3>
+
+            <p>
+
+                Walk or exercise for at least 30 minutes.
+
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+<!-- ==========================================
+     MEDICAL DISCLAIMER
+========================================== -->
+
+<section class="medical-disclaimer">
+
+    <div class="disclaimer-card">
+
+        <div class="disclaimer-icon">
+
+            <i class="fa-solid fa-circle-info"></i>
+
+        </div>
+
+        <div class="disclaimer-content">
+
+            <h2>
+
+                Medical Disclaimer
+
+            </h2>
+
+            <p>
+
+                MedVerse AI is designed to provide general health information,
+                wellness guidance, and educational support. It does not replace
+                a licensed doctor, medical diagnosis, or emergency healthcare
+                services.
+
+            </p>
+
+            <p>
+
+                Always consult a qualified healthcare professional before
+                making medical decisions or taking any medication.
+
+            </p>
+
+            <p>
+
+                If you experience chest pain, difficulty breathing,
+                severe bleeding, unconsciousness, stroke symptoms,
+                or any life-threatening emergency, immediately contact
+                your local emergency medical services or visit the nearest
+                hospital.
+
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ==========================================
+     FOOTER
+========================================== -->
+
+<footer class="assistant-footer">
+
+    <div class="footer-content">
+
+        <div class="footer-logo">
+
+            <i class="fa-solid fa-heart-pulse"></i>
+
+            <h2>
+
+                MedVerse
+
+            </h2>
+
+        </div>
+
+        <p>
+
+            AI Powered Healthcare Assistant
+
+        </p>
+
+        <p>
+
+            © 2026 MedVerse. All Rights Reserved.
+
+        </p>
+
+    </div>
+
+</footer>
+
+</div>
+
+<!-- ==========================================
+     JAVASCRIPT
+========================================== -->
+
+
+
+<script src="assistant.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Sign Up | MedVerse</title>
+
+    <link rel="stylesheet" href="login.css">
+
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+</head>
+
+
+<body>
+
+    <div class="login-container">
+
+        <!-- ==========================================
+             LEFT PANEL
+        ========================================== -->
+
+        <div class="left-panel">
+
+            <div class="logo">
+
+                <i class="fa-solid fa-heart-pulse"></i>
+
+                <h1>MedVerse</h1>
+
+            </div>
+
+
+            <h2>
+
+                Create Your Account 💙
+
+            </h2>
+
+
+            <p>
+
+                Join MedVerse and manage your health,
+                medicine reminders, consultations,
+                and medical history in one place.
+
+            </p>
+
+
+            <img
+                src="images/doctor/doctor.png"
+                alt="AI Doctor"
+                onerror="this.style.display='none';">
+
+        </div>
+
+
+        <!-- ==========================================
+             RIGHT PANEL
+        ========================================== -->
+
+        <div class="right-panel">
+
+            <div class="login-box">
+
+                <h2>
+
+                    Sign Up
+
+                </h2>
+
+
+                <p>
+
+                    Create your MedVerse account
+
+                </p>
+
+
+                <!-- ==========================================
+                     SIGNUP FORM
+                ========================================== -->
+
+                <form id="signupForm">
+
+
+                    <!-- Full Name -->
+
+                    <div class="input-box">
+
+                        <label for="fullName">
+
+                            Full Name
+
+                        </label>
+
+
+                        <input
+                            type="text"
+                            id="fullName"
+                            placeholder="Enter your full name"
+                            autocomplete="name"
+                            required>
+
+                    </div>
+
+
+                    <!-- Email -->
+
+                    <div class="input-box">
+
+                        <label for="email">
+
+                            Email Address
+
+                        </label>
+
+
+                        <input
+                            type="email"
+                            id="email"
+                            placeholder="Enter your email"
+                            autocomplete="email"
+                            required>
+
+                    </div>
+
+
+                    <!-- Phone -->
+
+                    <div class="input-box">
+
+                        <label for="phone">
+
+                            Phone Number
+
+                        </label>
+
+
+                        <input
+                            type="tel"
+                            id="phone"
+                            placeholder="Enter your phone number"
+                            autocomplete="tel"
+                            required>
+
+                    </div>
+
+
+                    <!-- Password -->
+
+                    <div class="input-box">
+
+                        <label for="password">
+
+                            Password
+
+                        </label>
+
+
+                        <input
+                            type="password"
+                            id="password"
+                            placeholder="Create password"
+                            autocomplete="new-password"
+                            minlength="6"
+                            required>
+
+                    </div>
+
+
+                    <!-- Confirm Password -->
+
+                    <div class="input-box">
+
+                        <label for="confirmPassword">
+
+                            Confirm Password
+
+                        </label>
+
+
+                        <input
+                            type="password"
+                            id="confirmPassword"
+                            placeholder="Confirm password"
+                            autocomplete="new-password"
+                            minlength="6"
+                            required>
+
+                    </div>
+
+
+                    <!-- Password message -->
+
+                    <p
+                        id="passwordMessage"
+                        style="
+                            display:none;
+                            color:#e53935;
+                            font-size:13px;
+                            margin-top:-8px;
+                            margin-bottom:10px;
+                        ">
+
+                        Passwords do not match.
+
+                    </p>
+
+
+                    <!-- Terms -->
+
+                    <div class="options">
+
+                        <label>
+
+                            <input
+                                type="checkbox"
+                                id="terms"
+                                required>
+
+
+                            I agree to the
+
+                            <a href="#">
+
+                                Terms & Conditions
+
+                            </a>
+
+                        </label>
+
+                    </div>
+
+
+                    <!-- Error / Success message -->
+
+                    <div
+                        id="signupMessage"
+                        style="
+                            display:none;
+                            margin:12px 0;
+                            padding:10px;
+                            border-radius:8px;
+                            font-size:14px;
+                            text-align:center;
+                        ">
+
+                    </div>
+
+
+                    <!-- Signup Button -->
+
+                    <button
+                        type="submit"
+                        class="login-btn"
+                        id="signupButton">
+
+                        Create Account
+
+                    </button>
+
+
+                </form>
+
+
+                <!-- ==========================================
+                     DIVIDER
+                ========================================== -->
+
+                <div class="divider">
+
+                    OR
+
+                </div>
+
+
+                <!-- ==========================================
+                     GOOGLE
+                ========================================== -->
+
+                <div class="social-login">
+
+                    <button
+                        type="button"
+                        id="googleSignup">
+
+                        <i class="fa-brands fa-google"></i>
+
+                        Continue with Google
+
+                    </button>
+
+                </div>
+
+
+                <!-- ==========================================
+                     LOGIN LINK
+                ========================================== -->
+
+                <div class="signup-link">
+
+                    Already have an account?
+
+
+                    <a href="login.html">
+
+                        Login
+
+                    </a>
+
+                </div>
+
+
+                <!-- ==========================================
+                     HOME
+                ========================================== -->
+
+                <div class="back-home">
+
+                    <a href="index.html">
+
+                        ← Back to Home
+
+                    </a>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ==========================================
+         SIGNUP JAVASCRIPT
+    ========================================== -->
+
+    <script>
+
+        const signupForm =
+            document.getElementById("signupForm");
+
+        const signupButton =
+            document.getElementById("signupButton");
+
+        const signupMessage =
+            document.getElementById("signupMessage");
+
+        const password =
+            document.getElementById("password");
+
+        const confirmPassword =
+            document.getElementById("confirmPassword");
+
+        const passwordMessage =
+            document.getElementById("passwordMessage");
+
+
+        // ==========================================
+        // PASSWORD MATCH CHECK
+        // ==========================================
+
+        confirmPassword.addEventListener(
+            "input",
+            function () {
+
+                if (
+                    confirmPassword.value &&
+                    password.value !== confirmPassword.value
+                ) {
+
+                    passwordMessage.style.display =
+                        "block";
+
+                } else {
+
+                    passwordMessage.style.display =
+                        "none";
+
+                }
+
+            }
+        );
+
+
+        // ==========================================
+        // SHOW MESSAGE
+        // ==========================================
+
+        function showMessage(
+            message,
+            success = false
+        ) {
+
+            signupMessage.style.display =
+                "block";
+
+            signupMessage.textContent =
+                message;
+
+
+            if (success) {
+
+                signupMessage.style.background =
+                    "#dcfce7";
+
+                signupMessage.style.color =
+                    "#166534";
+
+            } else {
+
+                signupMessage.style.background =
+                    "#fee2e2";
+
+                signupMessage.style.color =
+                    "#991b1b";
+
+            }
+
+        }
+
+
+        // ==========================================
+        // SIGNUP
+        // ==========================================
+
+        signupForm.addEventListener(
+            "submit",
+            async function (event) {
+
+                event.preventDefault();
+
+
+                const name =
+                    document
+                        .getElementById("fullName")
+                        .value
+                        .trim();
+
+
+                const email =
+                    document
+                        .getElementById("email")
+                        .value
+                        .trim();
+
+
+                const phone =
+                    document
+                        .getElementById("phone")
+                        .value
+                        .trim();
+
+
+                const passwordValue =
+                    password.value;
+
+
+                const confirmPasswordValue =
+                    confirmPassword.value;
+
+
+                // ==========================================
+                // CHECK PASSWORD
+                // ==========================================
+
+                if (
+                    passwordValue !==
+                    confirmPasswordValue
+                ) {
+
+                    showMessage(
+                        "Passwords do not match."
+                    );
+
+                    passwordMessage.style.display =
+                        "block";
+
+                    return;
+
+                }
+
+
+                // ==========================================
+                // CHECK PASSWORD LENGTH
+                // ==========================================
+
+                if (passwordValue.length < 6) {
+
+                    showMessage(
+                        "Password must contain at least 6 characters."
+                    );
+
+                    return;
+
+                }
+
+
+                // ==========================================
+                // BUTTON LOADING
+                // ==========================================
+
+                signupButton.disabled = true;
+
+                signupButton.textContent =
+                    "Creating Account...";
+
+
+                try {
+
+                    // ==========================================
+                    // SEND DATA TO SERVER
+                    // ==========================================
+
+                    const response =
+                        await fetch(
+                            "http://localhost:3000/api/signup",
+                            {
+
+                                method: "POST",
+
+                                headers: {
+
+                                    "Content-Type":
+                                        "application/json"
+
+                                },
+
+                                body: JSON.stringify({
+
+                                    name: name,
+
+                                    email: email,
+
+                                    phone: phone,
+
+                                    password:
+                                        passwordValue
+
+                                })
+
+                            }
+                        );
+
+
+                    const data =
+                        await response.json();
+
+
+                    // ==========================================
+                    // SERVER ERROR
+                    // ==========================================
+
+                    if (!response.ok) {
+
+                        showMessage(
+                            data.message ||
+                            "Unable to create account."
+                        );
+
+                        signupButton.disabled =
+                            false;
+
+                        signupButton.textContent =
+                            "Create Account";
+
+                        return;
+
+                    }
+
+
+                    // ==========================================
+                    // SUCCESS
+                    // ==========================================
+
+                    showMessage(
+                        "Account created successfully! Redirecting to login...",
+                        true
+                    );
+
+
+                    // Clear form
+
+                    signupForm.reset();
+
+
+                    // ==========================================
+                    // GO TO LOGIN
+                    // ==========================================
+
+                    setTimeout(
+                        function () {
+
+                            window.location.href =
+                                "login.html";
+
+                        },
+                        1500
+                    );
+
+
+                } catch (error) {
+
+                    console.error(
+                        "Signup error:",
+                        error
+                    );
+
+
+                    showMessage(
+                        "Cannot connect to MedVerse server. Make sure server.js is running."
+                    );
+
+
+                    signupButton.disabled =
+                        false;
+
+
+                    signupButton.textContent =
+                        "Create Account";
+
+                }
+
+            }
+        );
+
+
+        // ==========================================
+        // GOOGLE BUTTON
+        // ==========================================
+
+        document
+            .getElementById("googleSignup")
+            .addEventListener(
+                "click",
+                function () {
+
+                    alert(
+                        "Google Sign Up will be added later."
+                    );
+
+                }
+            );
+
+    </script>
+
+</body>
+
+</html>

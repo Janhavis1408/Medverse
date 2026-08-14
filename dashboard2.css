@@ -1,0 +1,764 @@
+/* =====================================================
+   MEDVERSE DASHBOARD 2
+   FINAL CARD OVERRIDE
+===================================================== */
+
+
+/* =====================================================
+   DASHBOARD GRID
+===================================================== */
+
+.dashboard-grid {
+
+    display: grid !important;
+
+    grid-template-columns:
+        repeat(4, minmax(220px, 1fr)) !important;
+
+    gap: 25px !important;
+
+    width: 100% !important;
+
+    margin-top: 30px;
+
+    margin-bottom: 45px;
+
+}
+
+
+/* =====================================================
+   CARD LINK
+   THIS WAS THE MISSING PART
+===================================================== */
+
+.dashboard-card-link {
+
+    display: block !important;
+
+    width: 100% !important;
+
+    text-decoration: none !important;
+
+    color: inherit !important;
+
+    outline: none;
+
+}
+
+
+/* Remove underline in every possible state */
+
+.dashboard-card-link:link {
+
+    text-decoration: none !important;
+
+}
+
+.dashboard-card-link:visited {
+
+    text-decoration: none !important;
+
+}
+
+.dashboard-card-link:hover {
+
+    text-decoration: none !important;
+
+}
+
+.dashboard-card-link:active {
+
+    text-decoration: none !important;
+
+}
+
+.dashboard-card-link:focus {
+
+    text-decoration: none !important;
+
+    outline: none;
+
+}
+
+
+/* =====================================================
+   DASHBOARD CARD
+===================================================== */
+
+.dashboard-card {
+
+    width: 100% !important;
+
+    min-height: 270px;
+
+    box-sizing: border-box;
+
+    display: flex !important;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: flex-start;
+
+    padding: 32px 24px;
+
+    background: #ffffff;
+
+    border-radius: 24px;
+
+    border: 1px solid rgba(37, 99, 235, 0.08);
+
+    box-shadow:
+        0 10px 30px rgba(37, 99, 235, 0.08);
+
+    text-align: center;
+
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease,
+        border-color 0.3s ease;
+
+}
+
+
+/* =====================================================
+   CARD HOVER
+===================================================== */
+
+.dashboard-card-link:hover .dashboard-card {
+
+    transform: translateY(-8px);
+
+    border-color:
+        rgba(37, 99, 235, 0.20);
+
+    box-shadow:
+        0 20px 45px rgba(37, 99, 235, 0.16);
+
+}
+
+
+/* =====================================================
+   ICON
+===================================================== */
+
+.dashboard-card > i {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    width: 70px;
+
+    height: 70px;
+
+    margin-bottom: 20px;
+
+    border-radius: 20px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #2563eb,
+            #14b8a6
+        );
+
+    color: #ffffff;
+
+    font-size: 29px;
+
+    flex-shrink: 0;
+
+    box-shadow:
+        0 8px 22px
+        rgba(37, 99, 235, 0.20);
+
+}
+
+
+/* =====================================================
+   CARD TITLE
+===================================================== */
+
+.dashboard-card > h3 {
+
+    margin: 0 0 12px;
+
+    color: #172033 !important;
+
+    font-size: 20px;
+
+    font-weight: 700;
+
+    line-height: 1.3;
+
+    text-align: center;
+
+    text-decoration: none !important;
+
+}
+
+
+/* =====================================================
+   CARD DESCRIPTION
+===================================================== */
+
+.dashboard-card > p {
+
+    margin: 0;
+
+    max-width: 250px;
+
+    color: #687386 !important;
+
+    font-size: 14px;
+
+    line-height: 1.7;
+
+    text-align: center;
+
+    text-decoration: none !important;
+
+}
+
+
+/* =====================================================
+   EXTRA UNDERLINE PROTECTION
+===================================================== */
+
+.dashboard-card-link * {
+
+    text-decoration: none !important;
+
+}
+
+
+/* =====================================================
+   RESPONSIVE — LAPTOP
+===================================================== */
+
+@media (max-width: 1200px) {
+
+    .dashboard-grid {
+
+        grid-template-columns:
+            repeat(3, minmax(220px, 1fr))
+            !important;
+
+    }
+
+}
+
+
+/* =====================================================
+   RESPONSIVE — TABLET
+===================================================== */
+
+@media (max-width: 900px) {
+
+    .dashboard-grid {
+
+        grid-template-columns:
+            repeat(2, minmax(220px, 1fr))
+            !important;
+
+    }
+
+}
+
+
+/* =====================================================
+   RESPONSIVE — MOBILE
+===================================================== */
+
+@media (max-width: 600px) {
+
+    .dashboard-grid {
+
+        grid-template-columns:
+            1fr
+            !important;
+
+        gap: 20px !important;
+
+    }
+
+    .dashboard-card {
+
+        min-height: 240px;
+
+        padding: 28px 20px;
+
+    }
+
+}
+/* =========================================================
+   MEDVERSE HEALTH JOURNEY
+   dashboard2.css
+========================================================= */
+
+.health-journey {
+    width: 100%;
+    padding: 55px 20px 70px;
+    box-sizing: border-box;
+}
+
+
+/* =========================================================
+   HEADING
+========================================================= */
+
+.journey-heading {
+    text-align: center;
+    margin-bottom: 45px;
+}
+
+.journey-heading span {
+    display: inline-block;
+
+    padding: 7px 15px;
+
+    border-radius: 30px;
+
+    background: #eaf2ff;
+
+    color: #2563eb;
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+    letter-spacing: 1.4px;
+}
+
+.journey-heading h2 {
+    margin: 14px 0 8px;
+
+    color: #172554;
+
+    font-size: 30px;
+
+    font-weight: 800;
+}
+
+.journey-heading p {
+    margin: 0;
+
+    color: #64748b;
+
+    font-size: 15px;
+}
+
+
+/* =========================================================
+   FLOW AREA
+========================================================= */
+
+.journey-flow {
+
+    max-width: 1050px;
+
+    margin: 0 auto;
+
+    display: grid;
+
+    grid-template-columns:
+        1fr
+        70px
+        1fr
+        70px
+        1fr;
+
+    grid-template-rows:
+        auto
+        70px
+        auto;
+
+    align-items: center;
+
+    justify-content: center;
+}
+
+
+/* =========================================================
+   JOURNEY CARD
+========================================================= */
+
+.journey-card {
+
+    position: relative;
+
+    min-height: 165px;
+
+    padding: 25px;
+
+    box-sizing: border-box;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 20px;
+
+    text-decoration: none;
+
+    color: inherit;
+
+    background: #ffffff;
+
+    border-radius: 24px;
+
+    border: 1px solid rgba(37, 99, 235, 0.10);
+
+    box-shadow:
+        0 12px 30px rgba(37, 99, 235, 0.08);
+
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease,
+        border-color 0.3s ease;
+
+    z-index: 2;
+}
+
+
+.journey-card:hover {
+
+    transform: translateY(-6px);
+
+    border-color: rgba(37, 99, 235, 0.25);
+
+    box-shadow:
+        0 20px 40px rgba(37, 99, 235, 0.15);
+}
+
+
+/* =========================================================
+   STEP NUMBER
+========================================================= */
+
+.journey-step {
+
+    position: absolute;
+
+    top: 12px;
+
+    right: 15px;
+
+    color: #94a3b8;
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+    letter-spacing: 1px;
+}
+
+
+/* =========================================================
+   ICON
+========================================================= */
+
+.journey-icon {
+
+    width: 65px;
+
+    height: 65px;
+
+    min-width: 65px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 19px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #2563eb,
+            #14b8a6
+        );
+
+    color: #ffffff;
+
+    font-size: 26px;
+
+    box-shadow:
+        0 10px 22px rgba(37, 99, 235, 0.20);
+}
+
+
+/* =========================================================
+   TEXT
+========================================================= */
+
+.journey-card h3 {
+
+    margin: 0 0 7px;
+
+    color: #172554;
+
+    font-size: 17px;
+
+    line-height: 1.3;
+
+    font-weight: 700;
+}
+
+.journey-card p {
+
+    margin: 0;
+
+    color: #64748b;
+
+    font-size: 13px;
+
+    line-height: 1.5;
+}
+
+
+/* =========================================================
+   ARROWS
+========================================================= */
+
+.journey-connector {
+
+    width: 45px;
+
+    height: 45px;
+
+    margin: auto;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: #eaf2ff;
+
+    color: #2563eb;
+
+    font-size: 16px;
+}
+
+
+/* =========================================================
+   TOP ROW
+========================================================= */
+
+.journey-flow > .journey-card:nth-child(1) {
+    grid-column: 1;
+    grid-row: 1;
+}
+
+.journey-flow > .journey-connector:nth-child(2) {
+    grid-column: 2;
+    grid-row: 1;
+}
+
+.journey-flow > .journey-card:nth-child(3) {
+    grid-column: 3;
+    grid-row: 1;
+}
+
+.journey-flow > .journey-connector:nth-child(4) {
+    grid-column: 4;
+    grid-row: 1;
+}
+
+.journey-flow > .journey-card:nth-child(5) {
+    grid-column: 5;
+    grid-row: 1;
+}
+
+
+/* =========================================================
+   DOWN ARROW
+========================================================= */
+
+.journey-turn {
+
+    grid-column: 5;
+
+    grid-row: 2;
+
+    width: 45px;
+
+    height: 45px;
+
+    margin: auto;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: #eaf2ff;
+
+    color: #2563eb;
+
+    font-size: 16px;
+}
+
+
+/* =========================================================
+   SECOND ROW
+========================================================= */
+
+.journey-flow > .journey-card:nth-child(7) {
+
+    grid-column: 5;
+
+    grid-row: 3;
+}
+
+
+/* Left arrow */
+
+.journey-left {
+
+    grid-column: 4;
+
+    grid-row: 3;
+}
+
+
+/* Final card */
+
+.journey-flow > .journey-card:nth-child(9) {
+
+    grid-column: 3;
+
+    grid-row: 3;
+}
+
+
+/* =========================================================
+   MAKE THE SECOND ROW FLOW CORRECTLY
+========================================================= */
+
+.journey-flow > .journey-connector.journey-left {
+
+    transform: none;
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 1000px) {
+
+    .journey-flow {
+
+        grid-template-columns:
+            1fr
+            50px
+            1fr
+            50px
+            1fr;
+
+    }
+
+    .journey-card {
+
+        padding: 20px;
+
+        gap: 14px;
+    }
+
+    .journey-icon {
+
+        width: 55px;
+
+        height: 55px;
+
+        min-width: 55px;
+
+        font-size: 22px;
+    }
+
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 750px) {
+
+    .journey-flow {
+
+        display: flex;
+
+        flex-direction: column;
+
+        gap: 12px;
+    }
+
+    .journey-card {
+
+        width: 100%;
+
+        max-width: 420px;
+
+        min-height: 145px;
+    }
+
+    .journey-connector,
+    .journey-turn {
+
+        transform: rotate(90deg);
+
+        margin: 0;
+    }
+
+    .journey-left {
+
+        transform: rotate(90deg);
+    }
+
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+
+@media (max-width: 450px) {
+
+    .health-journey {
+
+        padding-left: 12px;
+
+        padding-right: 12px;
+    }
+
+    .journey-heading h2 {
+
+        font-size: 24px;
+    }
+
+    .journey-heading p {
+
+        font-size: 13px;
+    }
+
+    .journey-card {
+
+        padding: 20px;
+    }
+
+}

@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>My Profile | MedVerse</title>
+
+    <link rel="stylesheet"
+        href="dashboard.css">
+
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+    <link rel="preconnect"
+        href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+</head>
+
+<body>
+
+    <!-- Sidebar -->
+
+    <aside class="sidebar">
+
+        <div class="logo">
+
+            <i class="fa-solid fa-heart-pulse"></i>
+
+            <h2>MedVerse</h2>
+
+        </div>
+
+        <ul>
+
+            <li><a href="dashboard.html"><i class="fa-solid fa-house"></i> Dashboard</a></li>
+
+            <li><a href="assistant.html"><i class="fa-solid fa-robot"></i> AI Assistant</a></li>
+
+            <li><a href="reminder.html"><i class="fa-solid fa-pills"></i> Medicine Reminder</a></li>
+
+            <li><a href="hospital.html"><i class="fa-solid fa-hospital"></i> Hospitals</a></li>
+
+            
+
+            
+        </ul>
+
+    </aside>
+
+    <!-- Main Content -->
+
+    <main class="main-content">
+
+        <header class="dashboard-header">
+
+            <h1>
+
+                👤 My Profile
+
+            </h1>
+
+            <p>
+
+                Manage your personal and health information.
+
+            </p>
+
+        </header>
+
+        <!-- Profile Card -->
+
+        <section class="profile-card">
+
+            <div class="profile-image">
+
+                <img src="doctor.png"
+                    alt="Profile Picture">
+
+            </div>
+
+            <div class="profile-info">
+
+                <h2>
+
+                    Your Name
+
+                </h2>
+
+                <p>
+
+                    user@email.com
+
+                </p>
+
+                <button>
+
+                    Change Profile Picture
+
+                </button>
+
+            </div>
+
+        </section>
+
+        <!-- Personal Information -->
+
+        <section class="profile-section">
+
+            <h2>
+
+                Personal Information
+
+            </h2>
+
+            <div class="profile-grid">
+
+                <div class="input-box">
+
+                    <label>Full Name</label>
+
+                    <input type="text"
+                        placeholder="Enter Full Name">
+
+                </div>
+
+                <div class="input-box">
+
+                    <label>Email</label>
+
+                    <input type="email"
+                        placeholder="Enter Email">
+
+                </div>
+
+                <div class="input-box">
+
+                    <label>Phone Number</label>
+
+                    <input type="tel"
+                        placeholder="Enter Phone Number">
+
+                </div>
+
+                <div class="input-box">
+
+                    <label>Date of Birth</label>
+
+                    <input type="date">
+
+                </div>
+
+                <div class="input-box">
+
+                    <label>Gender</label>
+
+                    <select>
+
+                        <option>Male</option>
+
+                        <option>Female</option>
+
+                        <option>Other</option>
+
+                    </select>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- Health Information -->
+
+        <section class="profile-section">
+
+            <h2>
+
+                Health Information
+
+            </h2>
+
+            <div class="profile-grid">
+
+                <div class="input-box">
+
+                    <label>Blood Group</label>
+
+                    <select>
+
+                        <option>A+</option>
+                        <option>A-</option>
+                        <option>B+</option>
+                        <option>B-</option>
+                        <option>AB+</option>
+                        <option>AB-</option>
+                        <option>O+</option>
+                        <option>O-</option>
+
+                    </select>
+
+                </div>
+
+                <div class="input-box">
+
+                    <label>Height (cm)</label>
+
+                    <input type="number">
+
+                </div>
+
+                <div class="input-box">
+
+                    <label>Weight (kg)</label>
+
+                    <input type="number">
+
+                </div>
+
+                <div class="input-box">
+
+                    <label>Allergies</label>
+
+                    <input type="text"
+                        placeholder="Enter Allergies">
+
+                </div>
+
+                <div class="input-box">
+
+                    <label>Existing Medical Conditions</label>
+
+                    <textarea rows="3"></textarea>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- Emergency Contact -->
+
+        <section class="profile-section">
+
+            <h2>
+
+                Emergency Contact
+
+            </h2>
+
+            <div class="profile-grid">
+
+                <div class="input-box">
+
+                    <label>Contact Name</label>
+
+                    <input type="text">
+
+                </div>
+
+                <div class="input-box">
+
+                    <label>Relationship</label>
+
+                    <input type="text">
+
+                </div>
+
+                <div class="input-box">
+
+                    <label>Phone Number</label>
+
+                    <input type="tel">
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- Preferences -->
+
+        <section class="profile-section">
+
+            <h2>
+
+                Preferences
+
+            </h2>
+
+            <div class="profile-grid">
+
+                <div class="input-box">
+
+                    <label>Language</label>
+
+                    <select>
+
+                        <option>English</option>
+
+                        <option>Hindi</option>
+
+                    </select>
+
+                </div>
+
+                <div class="input-box">
+
+                    <label>Theme</label>
+
+                    <select>
+
+                        <option>Light</option>
+
+                        
+
+                    </select>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- Save -->
+
+        <section class="save-profile">
+
+            <button>
+
+                Save Changes
+
+            </button>
+
+        </section>
+
+    </main>
+
+</body>
+
+</html>
