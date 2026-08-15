@@ -10,27 +10,26 @@ const crypto = require("crypto");
 
 const app = express();
 
+// ==========================================
+// BASIC MIDDLEWARE
+// ==========================================
+
 app.use(cors());
 app.use(express.json());
 
 // ==========================================
-// SERVE FRONTEND FILES
+// FILE PATHS
 // ==========================================
 
-app.use(express.static(__dirname));
+const USERS_FILE = path.join(__dirname, "users.json");
 
 // ==========================================
 // USER AUTHENTICATION
 // ==========================================
 
-const USERS_FILE = path.join(__dirname, "users.json");
-
-
 // Read users from users.json
 function getUsers() {
-
     try {
-
         const data = fs.readFileSync(
             USERS_FILE,
             "utf8"
@@ -39,26 +38,18 @@ function getUsers() {
         return JSON.parse(data);
 
     } catch (error) {
-
         console.log("Error reading users:", error);
-
         return [];
-
     }
-
 }
-
 
 // Save users to users.json
 function saveUsers(users) {
-
     fs.writeFileSync(
         USERS_FILE,
         JSON.stringify(users, null, 2)
     );
-
 }
-
 
 // Hash password securely
 function hashPassword(password) {
@@ -77,9 +68,7 @@ function hashPassword(password) {
         salt,
         hash
     };
-
 }
-
 
 // Verify password
 function verifyPassword(
@@ -99,9 +88,7 @@ function verifyPassword(
         Buffer.from(hash, "hex"),
         Buffer.from(storedHash, "hex")
     );
-
 }
-
 
 // ==========================================
 // SIGN UP
@@ -118,7 +105,6 @@ app.post("/api/signup", (req, res) => {
             password
         } = req.body;
 
-
         if (
             !name ||
             !email ||
@@ -127,59 +113,44 @@ app.post("/api/signup", (req, res) => {
         ) {
 
             return res.status(400).json({
-
                 success: false,
-
                 message:
                     "Please fill in all fields."
-
             });
 
         }
-
 
         if (password.length < 6) {
 
             return res.status(400).json({
-
                 success: false,
-
                 message:
                     "Password must contain at least 6 characters."
-
             });
 
         }
 
-
         const users = getUsers();
-
 
         const existingUser =
             users.find(
                 user =>
                     user.email.toLowerCase() ===
-                    email.toLowerCase()
+                    email.trim().toLowerCase()
             );
-
 
         if (existingUser) {
 
             return res.status(409).json({
-
                 success: false,
-
                 message:
                     "An account with this email already exists."
-
             });
 
         }
 
-
         const passwordData =
             hashPassword(password);
-
 
         const newUser = {
 
@@ -200,20 +171,16 @@ app.post("/api/signup", (req, res) => {
 
             createdAt:
                 new Date().toISOString()
-
         };
-
 
         users.push(newUser);
 
         saveUsers(users);
 
-
         console.log(
             "✅ New user created:",
             newUser.email
         );
-
 
         res.status(201).json({
 
@@ -221,9 +188,7 @@ app.post("/api/signup", (req, res) => {
 
             message:
                 "Account created successfully!"
-
         });
-
 
     } catch (error) {
 
@@ -238,13 +203,9 @@ app.post("/api/signup", (req, res) => {
 
             message:
                 "Unable to create account."
-
         });
-
     }
-
 });
-
 
 // ==========================================
 // LOGIN
@@ -259,7 +220,6 @@ app.post("/api/login", (req, res) => {
             password
         } = req.body;
 
-
         if (!email || !password) {
 
             return res.status(400).json({
@@ -268,14 +228,11 @@ app.post("/api/login", (req, res) => {
 
                 message:
                     "Please enter your email and password."
-
             });
 
         }
 
-
         const users = getUsers();
-
 
         const user =
             users.find(
@@ -283,7 +240,6 @@ app.post("/api/login", (req, res) => {
                     user.email.toLowerCase() ===
                     email.trim().toLowerCase()
             );
-
 
         if (!user) {
 
@@ -293,11 +249,9 @@ app.post("/api/login", (req, res) => {
 
                 message:
                     "Invalid email or password."
-
             });
 
         }
-
 
         const passwordCorrect =
             verifyPassword(
@@ -305,7 +259,6 @@ app.post("/api/login", (req, res) => {
                 user.passwordSalt,
                 user.passwordHash
             );
-
 
         if (!passwordCorrect) {
 
@@ -315,17 +268,14 @@ app.post("/api/login", (req, res) => {
 
                 message:
                     "Invalid email or password."
-
             });
 
         }
-
 
         console.log(
             "✅ User logged in:",
             user.email
         );
-
 
         res.json({
 
@@ -343,11 +293,8 @@ app.post("/api/login", (req, res) => {
                 email: user.email,
 
                 phone: user.phone
-
             }
-
         });
-
 
     } catch (error) {
 
@@ -362,48 +309,68 @@ app.post("/api/login", (req, res) => {
 
             message:
                 "Unable to login."
-
         });
-
     }
-
 });
 
-// ===================================
+// ==========================================
 // GROQ CLIENT
-// ===================================
+// ==========================================
 
 const client = new OpenAI({
-  apiKey: process.env.GROQ_API_KEY,
-  baseURL: "https://api.groq.com/openai/v1",
+
+    apiKey:
+        process.env.GROQ_API_KEY,
+
+    baseURL:
+        "https://api.groq.com/openai/v1"
 });
 
-// ===================================
-// CHAT ROUTE
-// ===================================
+// ==========================================
+// AI CHAT
+// ==========================================
 
 app.post("/chat", async (req, res) => {
-  console.log("📨 Chat request received!");
 
-  try {
-    const { message, language } = req.body;
-    const languageInstruction =
-  language === "hi-IN"
-    ? "Reply completely in Hindi (हिन्दी). Use simple, natural Hindi. Do not reply in English unless the user asks for English."
-    : "Reply completely in English. Use simple, clear English.";
-    console.log("🚀 Sending request to Groq...");
+    console.log("📨 Chat request received!");
 
-    const completion = await client.chat.completions.create({
-      model: "llama-3.3-70b-versatile",
+    try {
 
-      temperature: 0.5,
+        const {
+            message,
+            language
+        } = req.body;
 
-      max_tokens: 300,
+        const languageInstruction =
+            language === "hi-IN"
 
-      messages: [
-        {
-          role: "system",
-          content: `
+                ? "Reply completely in Hindi (हिन्दी). Use simple, natural Hindi. Do not reply in English unless the user asks for English."
+
+                : "Reply completely in English. Use simple, clear English.";
+
+        console.log(
+            "🚀 Sending request to Groq..."
+        );
+
+        const completion =
+            await client.chat.completions.create({
+
+                model:
+                    "llama-3.3-70b-versatile",
+
+                temperature:
+                    0.5,
+
+                max_tokens:
+                    300,
+
+                messages: [
+
+                    {
+                        role: "system",
+
+                        content: `
+
 You are Dr. MedVerse AI.
 
 You are a professional virtual healthcare assistant.
@@ -423,59 +390,197 @@ Rules:
 - End every response with:
 
 "This information is educational and is not a substitute for professional medical advice."
+
 `
-        },
+                    },
 
-        {
-          role: "user",
-          content: message,
-        },
-      ],
-    });
+                    {
+                        role: "user",
+                        content: message
+                    }
+                ]
+            });
 
-    console.log("✅ Groq replied successfully!");
+        console.log(
+            "✅ Groq replied successfully!"
+        );
 
-    const reply =
-      completion.choices?.[0]?.message?.content ||
-      "Sorry, I couldn't generate a response.";
+        const reply =
+            completion
+                .choices?.[0]
+                ?.message
+                ?.content ||
 
-    res.json({
-      reply,
-    });
-  } catch (error) {
-    console.log("\n========== GROQ ERROR ==========\n");
+            "Sorry, I couldn't generate a response.";
 
-    console.log(error);
+        res.json({
+            reply
+        });
 
-    if (error.response) {
-      console.log("Status:", error.response.status);
-      console.log(error.response.data);
+    } catch (error) {
+
+        console.log(
+            "\n========== GROQ ERROR ==========\n"
+        );
+
+        console.log(error);
+
+        if (error.response) {
+
+            console.log(
+                "Status:",
+                error.response.status
+            );
+
+            console.log(
+                error.response.data
+            );
+        }
+
+        res.status(500).json({
+
+            reply:
+                "Sorry, MedVerse AI is currently unavailable."
+        });
     }
-
-    res.status(500).json({
-      reply: "Sorry, MedVerse AI is currently unavailable.",
-    });
-  }
 });
 
-// ===================================
+// ==========================================
+// FRONTEND FILE SERVER
+// ==========================================
 
-// ===================================
-// SERVE MEDVERSE WEBSITE
-// ===================================
-
-app.use(express.static(__dirname));
-
+// Homepage
 app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "index.html"));
+
+    res.sendFile(
+        path.join(
+            __dirname,
+            "index.html"
+        )
+    );
 });
 
-// ===================================
-// START SERVER
-// ===================================
+// ------------------------------------------
+// HTML FILES
+// ------------------------------------------
 
-const PORT = process.env.PORT || 3000;
+const htmlPages = [
+    "index.html",
+    "assistant.html",
+    "dashboard.html",
+    "hospital.html",
+    "login.html",
+    "signup.html",
+    "profile.html",
+    "reminder.html"
+];
+
+htmlPages.forEach(page => {
+
+    app.get(`/${page}`, (req, res) => {
+
+        res.sendFile(
+            path.join(
+                __dirname,
+                page
+            )
+        );
+
+    });
+
+});
+
+// ------------------------------------------
+// CSS FILES
+// ------------------------------------------
+
+const cssFiles = [
+    "style.css",
+    "assistant.css",
+    "dashboard.css",
+    "dashboard2.css",
+    "login.css"
+];
+
+cssFiles.forEach(file => {
+
+    app.get(`/${file}`, (req, res) => {
+
+        res.sendFile(
+            path.join(
+                __dirname,
+                file
+            )
+        );
+
+    });
+
+});
+
+// ------------------------------------------
+// JAVASCRIPT FILES
+// ------------------------------------------
+
+const jsFiles = [
+    "app.js",
+    "assistant.js",
+    "simple.js",
+    "test.js"
+];
+
+jsFiles.forEach(file => {
+
+    app.get(`/${file}`, (req, res) => {
+
+        res.sendFile(
+            path.join(
+                __dirname,
+                file
+            )
+        );
+
+    });
+
+});
+
+// ------------------------------------------
+// IMAGE FILES
+// ------------------------------------------
+
+app.get("/doctor.png", (req, res) => {
+
+    res.sendFile(
+        path.join(
+            __dirname,
+            "doctor.png"
+        )
+    );
+
+});
+
+// ==========================================
+// 404 HANDLER
+// ==========================================
+
+app.use((req, res) => {
+
+    res.status(404).send(
+        "MedVerse: Page not found."
+    );
+
+});
+
+// ==========================================
+// START SERVER
+// ==========================================
+
+const PORT =
+    process.env.PORT || 3000;
 
 app.listen(PORT, () => {
-  console.log(`🚀 MedVerse AI Server running on http://localhost:${PORT}`);
+
+    console.log(
+        `🚀 MedVerse AI Server running on http://localhost:${PORT}`
+    );
+
 });
