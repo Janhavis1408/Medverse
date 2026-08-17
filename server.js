@@ -269,13 +269,11 @@ app.post("/api/login", (req, res) => {
 
 app.get("/api/nearby-places", async (req, res) => {
     try {
-        const { lat, lon } = req.query;
+        const { lat, lon, type } = req.query;
 
         if (!lat || !lon) {
             return res.status(400).json({
-                success: false,
-                error:
-                    "Latitude and longitude are required."
+                error: "Latitude and longitude are required."
             });
         }
 
@@ -283,105 +281,152 @@ app.get("/api/nearby-places", async (req, res) => {
         const longitude = Number(lon);
 
         if (
-            Number.isNaN(latitude) ||
-            Number.isNaN(longitude)
+            !Number.isFinite(latitude) ||
+            !Number.isFinite(longitude)
         ) {
             return res.status(400).json({
-                success: false,
-                error:
-                    "Invalid latitude or longitude."
+                error: "Invalid coordinates."
             });
         }
 
-        console.log(
-            `Searching hospitals/pharmacies near ${latitude}, ${longitude}`
-        );
-
         const radius = 5000;
 
-        const query = `
+        let query;
+
+        if (type === "pharmacy") {
+            query = `
 [out:json][timeout:25];
 
 (
-    node["amenity"="hospital"]
-        (around:${radius},${latitude},${longitude});
-
-    way["amenity"="hospital"]
-        (around:${radius},${latitude},${longitude});
-
-    relation["amenity"="hospital"]
-        (around:${radius},${latitude},${longitude});
-
-    node["amenity"="pharmacy"]
-        (around:${radius},${latitude},${longitude});
-
-    way["amenity"="pharmacy"]
-        (around:${radius},${latitude},${longitude});
-
-    relation["amenity"="pharmacy"]
-        (around:${radius},${latitude},${longitude});
+  node["amenity"="pharmacy"](around:${radius},${latitude},${longitude});
+  way["amenity"="pharmacy"](around:${radius},${latitude},${longitude});
+  relation["amenity"="pharmacy"](around:${radius},${latitude},${longitude});
 );
 
 out center tags;
 `;
+        } else {
+            query = `
+[out:json][timeout:25];
 
-        // THIS MUST CALL OVERPASS
-        // NOT /api/nearby-places
-        const overpassResponse = await fetch(
-            "https://overpass-api.de/api/interpreter",
-            {
-                method: "POST",
+(
+  node["amenity"="hospital"](around:${radius},${latitude},${longitude});
+  way["amenity"="hospital"](around:${radius},${latitude},${longitude});
+  relation["amenity"="hospital"](around:${radius},${latitude},${longitude});
+);
 
-                headers: {
-                    "Content-Type":
-                        "application/x-www-form-urlencoded"
-                },
-
-                body:
-                    "data=" +
-                    encodeURIComponent(query)
-            }
-        );
-
-        if (!overpassResponse.ok) {
-            const errorText =
-                await overpassResponse.text();
-
-            console.error(
-                "Overpass returned:",
-                overpassResponse.status,
-                errorText
-            );
-
-            return res.status(502).json({
-                success: false,
-                error:
-                    "Overpass API is currently unavailable."
-            });
+out center tags;
+`;
         }
 
-        const data =
-            await overpassResponse.json();
+        /*
+         * Try multiple public Overpass servers.
+         * If one is busy/unavailable, try the next one.
+         */
 
-        console.log(
-            "Nearby places found:",
-            data.elements
-                ? data.elements.length
-                : 0
+        const overpassServers = [
+            "https://overpass.private.coffee/api/interpreter",
+            "https://overpass-api.de/api/interpreter"
+        ];
+
+        let lastError = null;
+
+        for (const server of overpassServers) {
+
+            try {
+
+                console.log(
+                    `🌍 Trying Overpass server: ${server}`
+                );
+
+                const response = await fetch(
+                    server,
+                    {
+                        method: "POST",
+
+                        headers: {
+                            "Content-Type":
+                                "application/x-www-form-urlencoded",
+
+                            "User-Agent":
+                                "MedVerse/1.0"
+                        },
+
+                        body:
+                            "data=" +
+                            encodeURIComponent(query),
+
+                        signal:
+                            AbortSignal.timeout(30000)
+                    }
+                );
+
+                console.log(
+                    `Overpass response: ${response.status}`
+                );
+
+                if (!response.ok) {
+
+                    const errorText =
+                        await response.text();
+
+                    console.log(
+                        `Overpass ${server} failed:`,
+                        errorText.slice(0, 500)
+                    );
+
+                    lastError =
+                        new Error(
+                            `Overpass returned ${response.status}`
+                        );
+
+                    continue;
+                }
+
+                const data =
+                    await response.json();
+
+                console.log(
+                    `✅ Overpass success: ${data.elements?.length || 0} places`
+                );
+
+                return res.json(data);
+
+            } catch (error) {
+
+                console.error(
+                    `❌ Overpass server failed: ${server}`,
+                    error.message
+                );
+
+                lastError = error;
+            }
+        }
+
+        /*
+         * All Overpass servers failed.
+         */
+
+        console.error(
+            "❌ All Overpass servers failed:",
+            lastError
         );
 
-        return res.json(data);
+        return res.status(502).json({
+            error:
+                "Nearby healthcare service is temporarily unavailable."
+        });
 
     } catch (error) {
+
         console.error(
-            "Nearby places error:",
+            "Nearby places route error:",
             error
         );
 
         return res.status(500).json({
-            success: false,
             error:
-                "Unable to find nearby hospitals and pharmacies."
+                "Unable to search nearby healthcare locations."
         });
     }
 });
