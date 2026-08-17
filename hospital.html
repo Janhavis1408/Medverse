@@ -834,9 +834,7 @@ const SEARCH_RADIUS = 5000;
 
    No API key required.
 */
-
-const OVERPASS_URL =
-    "https://overpass-api.de/api/interpreter";
+const OVERPASS_URL = "/api/nearby-places";
 
 
 /* =================================================
@@ -1412,31 +1410,9 @@ async function searchNearbyPlaces() {
            Send query to Overpass.
         */
 
-        const response =
-            await fetch(
-
-                OVERPASS_URL,
-
-                {
-
-                    method: "POST",
-
-                    headers: {
-
-                        "Content-Type":
-                            "application/x-www-form-urlencoded"
-
-                    },
-
-                    body:
-                        "data=" +
-                        encodeURIComponent(
-                            query
-                        )
-
-                }
-
-            );
+        const response = await fetch(
+    `/api/nearby-places?lat=${userLocation.lat}&lon=${userLocation.lng}&type=${currentType}`
+);
 
 
         if (!response.ok) {
